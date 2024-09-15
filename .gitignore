@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+log/
+
+# Dependency directories
+node_modules/
+
+# TypeScript
+dist/
+out/
+build/
+
+
+# PostgreSQL
+pgdata/
+*.sql
+*.db
+
+# Environment files
+.env
+.env.*.local
+.env.local
+
+# Miscellaneous
+.DS_Store
+.idea/
+.vscode/
+
+# Coverage and build outputs
+coverage/
