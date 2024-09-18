@@ -18,7 +18,6 @@ build/
 
 # PostgreSQL
 pgdata/
-*.sql
 *.db
 
 # Environment files
