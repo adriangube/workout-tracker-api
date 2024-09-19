@@ -9,14 +9,25 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "outDir": "./dist",
   },
+  "include": [
+    "src/swagger-output.json",
+    "src/**/*"
+  ],
   "exclude": [
-    "node_modules",
+    "node_modules"
+  ],
+    "typeRoots": [
+    "node_modules/@types"
+  ],
+  "types": [
+    "node",
+    "express"
   ],
   "ts-node": {
     "esm": true,

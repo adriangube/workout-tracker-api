@@ -1,9 +1,9 @@
 import './env'
 import express, {json, Express, Request, Response} from 'express';
 import morgan from 'morgan'
-import { workoutsRouter } from './routes/workouts'
-import { usersRouter } from './routes/users'
-import { exercisesRouter } from './routes/exercises'
+import { router } from './routes';
+import swaggerUi from "swagger-ui-express";
+import swaggerOutput from "./swagger_output.json";
 
 const app: Express = express();
 
@@ -12,9 +12,10 @@ app.use(morgan('tiny'))
 app.disable('x-powered-by')
 
 
-app.use('/api/workouts', workoutsRouter)
-app.use('/api/users', usersRouter)
-app.use('/api/exercises', exercisesRouter)
+app.use('/', router)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
+
 
 app.use((req, res) => {
   res.status(404).send('<h1>404</h1>')
