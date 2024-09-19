@@ -1,5 +1,7 @@
 import express, {Request, Response} from "express";
 import {Database} from "../database/client";
+import bcrypt from 'bcrypt'
+
 export const usersRouter = express.Router();
 
 usersRouter.get('/', async (req: Request, res: Response) => {
@@ -70,13 +72,14 @@ usersRouter.get('/', async (req: Request, res: Response) => {
 
 usersRouter.post('/', async(req: Request, res: Response) => {
     const db = await Database.getConnection()
+    const hashedPassword = await bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS as string))
     const query = {
         text: `
             INSERT INTO users(name, email, password)
             VALUES($1, $2, $3)
             RETURNING id, name, email
         `,
-        values: [req.body.name, req.body.email, req.body.password]
+        values: [req.body.name, req.body.email, hashedPassword]
     }
     const response = await db.query(query)
     await db.end()
