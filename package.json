@@ -4,7 +4,7 @@
   "description": "A workout tracker api written in node.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:swagger": "tsx ./src/swagger.ts",
+    "build:swagger": "tsx ./src/adapters/swagger/swagger.ts",
     "build": "npm run build:swagger && tsc",
     "start": "node ./dist/app.js",
     "dev": "tsx watch ./src/app.ts",

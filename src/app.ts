@@ -1,9 +1,9 @@
-import './env'
+import '@config/env'
 import express, {json, Express, Request, Response} from 'express';
 import morgan from 'morgan'
-import { router } from './adapters/routes';
 import swaggerUi from "swagger-ui-express";
-import swaggerOutput from "./swagger_output.json";
+import { router } from '@adapters/routes';
+import swaggerOutput from "@adapters/swagger/swagger_output.json";
 import { config } from '@config/index'
 
 const app: Express = express();
