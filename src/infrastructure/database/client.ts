@@ -1,6 +1,6 @@
 import pg from 'pg'
 import { config } from '@config/index'
-const { Client } = pg;
+const { Client } = pg
 
 export class Database {
   static getConnection = async() => {
