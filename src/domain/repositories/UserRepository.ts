@@ -1,4 +1,4 @@
-import { User, UserWithPassword } from '../entities/user';
+import { User, UserWithPassword } from '../entities/user'
 
 export interface UserRepository {
     getById: (id: string) => Promise<User | null>
