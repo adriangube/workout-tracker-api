@@ -1,0 +1,26 @@
+import { MuscleGroup } from '@domain/entities/muscleGroup'
+import { MuscleGroupRepository } from '@domain/repositories/MuscleGroupRepository'
+
+export class MuscleGroupService {
+  constructor(private muscleGroupRepository: MuscleGroupRepository) { }
+  
+  async getMuscleGroup(id: string): Promise<MuscleGroup | null> {
+    return await this.muscleGroupRepository.getById(id)
+  }
+
+  async getAllMuscleGroups(): Promise<MuscleGroup[]> {
+    return await this.muscleGroupRepository.getAll()
+  }
+
+  async createMuscleGroup(muscleGroup: MuscleGroup): Promise<MuscleGroup> {
+    return await this.muscleGroupRepository.save(muscleGroup)
+  }
+
+  async updateMuscleGroup(muscleGroup: MuscleGroup): Promise<MuscleGroup> {
+    return await this.muscleGroupRepository.patch(muscleGroup)
+  }
+
+  async deleteMuscleGroup(id: string): Promise<void> {
+    return await this.muscleGroupRepository.delete(id)
+  }
+}
