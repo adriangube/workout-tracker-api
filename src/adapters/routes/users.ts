@@ -9,12 +9,27 @@ const userRepository = new UserRepositoryImpl()
 const userService = new UserService(userRepository)
 const userController = new UserController(userService)
 
-usersRouter.get('/:id',userController.getUser.bind(userController))
+usersRouter.get('/:id', (res, req) => {
+  // #swagger.tags = ['Users']
+  userController.getUser(res, req)
+})
 
-usersRouter.get('/', userController.getAllUsers.bind(userController))
+usersRouter.get('/', (req, res) => {
+  // #swagger.tags = ['Users']
+  userController.getAllUsers(req, res)
+})
 
-usersRouter.post('/', userController.createUser.bind(userController))
+usersRouter.post('/', (req, res) => {
+  // #swagger.tags = ['Users']
+  userController.createUser(req, res)
+})
 
-usersRouter.patch('/:id', userController.updateUser.bind(userController))
+usersRouter.patch('/:id', (req, res) => {
+  // #swagger.tags = ['Users']
+  userController.updateUser(req, res)
+})
 
-usersRouter.delete('/:id', userController.deleteUser.bind(userController))
+usersRouter.delete('/:id', (req, res) => {
+  // #swagger.tags = ['Users']
+  userController.deleteUser(req, res)
+})

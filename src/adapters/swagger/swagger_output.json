@@ -14,7 +14,20 @@
   "paths": {
     "/api/users/{id}": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -22,7 +35,20 @@
         }
       },
       "patch": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -30,7 +56,20 @@
         }
       },
       "delete": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -40,6 +79,9 @@
     },
     "/api/users/": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -48,6 +90,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -58,7 +103,20 @@
     },
     "/api/muscle-groups/{id}": {
       "get": {
+        "tags": [
+          "Muscle Groups"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -66,7 +124,20 @@
         }
       },
       "patch": {
+        "tags": [
+          "Muscle Groups"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -74,7 +145,20 @@
         }
       },
       "delete": {
+        "tags": [
+          "Muscle Groups"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -84,6 +168,9 @@
     },
     "/api/muscle-groups/": {
       "get": {
+        "tags": [
+          "Muscle Groups"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -92,6 +179,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Muscle Groups"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -102,7 +192,20 @@
     },
     "/api/exercises/{id}": {
       "get": {
+        "tags": [
+          "Exercises"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -112,6 +215,9 @@
     },
     "/api/exercises/": {
       "get": {
+        "tags": [
+          "Exercises"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -120,6 +226,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Exercises"
+        ],
         "description": "",
         "responses": {
           "default": {

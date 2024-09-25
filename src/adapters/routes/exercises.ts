@@ -9,7 +9,16 @@ const exerciseRepository = new ExercisesRepositoryImpl()
 const exerciseService = new ExerciseService(exerciseRepository)
 const exerciseController = new ExerciseController(exerciseService)
 
-exercisesRouter.get('/:id', exerciseController.getExercise.bind(exerciseController))
-exercisesRouter.get('/', exerciseController.getAllExercises.bind(exerciseController))
-exercisesRouter.post('/', exerciseController.createExercise.bind(exerciseController))
+exercisesRouter.get('/:id', (req, res) => {
+  // #swagger.tags = ['Exercises']
+  exerciseController.getExercise(req, res)
+})
+exercisesRouter.get('/', (req, res) => {
+  // #swagger.tags = ['Exercises']
+  exerciseController.getAllExercises(req, res)
+})
+exercisesRouter.post('/', (req, res) => {
+  // #swagger.tags = ['Exercises']
+  exerciseController.createExercise(req, res)
+})
 
