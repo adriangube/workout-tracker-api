@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { ExerciseService } from '@application/services/ExerciseService'
 import { uuidValidator } from '@adapters/validators/UUIDValidator'
-import { exerciseValidator } from '@adapters/validators/ExerciseValidator'
+import { createExerciseValidator } from '@adapters/validators/ExerciseValidator'
 
 export class ExerciseController {
   constructor(private exerciseService: ExerciseService) { }
@@ -35,7 +35,7 @@ export class ExerciseController {
   }
 
   async createExercise(req: Request, res: Response) {
-    const validatorResult = await exerciseValidator(req.body)
+    const validatorResult = await createExerciseValidator(req.body)
     if (validatorResult.error) {
       return res.status(400).send(validatorResult.error)
     }

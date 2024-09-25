@@ -12,3 +12,4 @@ const exerciseController = new ExerciseController(exerciseService)
 exercisesRouter.get('/:id', exerciseController.getExercise.bind(exerciseController))
 exercisesRouter.get('/', exerciseController.getAllExercises.bind(exerciseController))
 exercisesRouter.post('/', exerciseController.createExercise.bind(exerciseController))
+
