@@ -12,6 +12,14 @@ const doc = {
       description: ''
     },
   ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+      }
+    }
+  },
   consumes: [ 'application/json' ],
   produces: [ 'application/json' ],
   definitions: {
