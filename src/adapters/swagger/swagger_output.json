@@ -445,6 +445,46 @@
           }
         }
       }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -458,7 +498,7 @@
       "UserCreationBody": {
         "type": "object",
         "properties": {
-          "name": {
+          "username": {
             "type": "string",
             "example": "username"
           },
@@ -482,7 +522,7 @@
             "type": "string",
             "example": "1"
           },
-          "name": {
+          "username": {
             "type": "string",
             "example": "username"
           },
@@ -504,7 +544,7 @@
               "type": "string",
               "example": "1"
             },
-            "name": {
+            "username": {
               "type": "string",
               "example": "username"
             },
@@ -663,6 +703,34 @@
         },
         "xml": {
           "name": "ExerciseCreationBody"
+        }
+      },
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "xml": {
+          "name": "LoginBody"
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "token"
+          }
+        },
+        "xml": {
+          "name": "LoginResponse"
         }
       }
     }

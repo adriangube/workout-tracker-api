@@ -5,5 +5,6 @@ export const config = {
   DB_HOST: process.env.DB_HOST,
   DB_PORT: process.env.DB_PORT as unknown as  number ?? 5432,
   DB_NAME: process.env.POSTGRES_DB,
-  SALT_ROUNDS: process.env.SALT_ROUNDS ? parseInt(process.env.SALT_ROUNDS) : 10
+  SALT_ROUNDS: process.env.SALT_ROUNDS ? parseInt(process.env.SALT_ROUNDS) : 10,
+  SECRET: process.env.SECRET
 }

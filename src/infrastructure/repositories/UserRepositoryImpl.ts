@@ -3,6 +3,36 @@ import { UserRepository } from '@domain/repositories/UserRepository'
 import { Database } from '@infrastructure/database/client'
 
 export class UserRepositoryImpl implements UserRepository {
+
+  async getByName(userName: string, withPassword: boolean = false): Promise<User | UserWithPassword | null> {
+    const db = await Database.getConnection()
+    let query
+
+    if (withPassword) {
+      query = {
+        text: `
+          SELECT id, username, email, password
+          FROM users
+          WHERE username = $1
+        `,
+        values: [ userName ]
+      }
+    } else {
+      query = {
+        text: `
+          SELECT id, username, email
+          FROM users
+          WHERE username = $1
+        `,
+        values: [ userName ]
+      }
+    }
+
+    const response = await db.query<User | UserWithPassword>(query)
+    await db.end()
+    return response?.rows[0] ?? null
+  }
+
   async getById (id: string): Promise<User | null> {
     const db = await Database.getConnection()
     const query = {
