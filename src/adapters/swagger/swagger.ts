@@ -13,6 +13,46 @@ const doc = {
     },
   ],
   components: {
+    schemas: {
+      user: {
+        type: 'object',
+        requires: [
+          'name',
+          'email'
+        ],
+        properties: {
+          id: {
+            type: 'string'
+          },
+          name: {
+            type: 'string',
+          },
+          email: {
+            type: 'string',
+          },
+          password: {
+            type: 'string',
+          }
+        },
+        example: {
+          id: '1',
+          name: 'username',
+          email: 'email@gmail.com',
+          password: 'password'
+        }
+      },
+      errorMessage: {
+        type: 'object',
+        required: [
+          'message'
+        ],
+        properties: {
+          message: {
+            type: 'string'
+          }
+        }
+      }
+    },
     securitySchemes: {
       bearerAuth: {
         type: 'http',
