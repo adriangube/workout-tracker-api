@@ -2,8 +2,13 @@ import { UserRepository } from '@domain/repositories/UserRepository'
 import { User, UserWithPassword } from '@domain/entities/user'
 import { hashPassword } from '@utils/password'
 
+
 export class UserService {
   constructor(private userRepository: UserRepository) { }
+
+  async getUserByName(userName: string, withPassword: boolean = false): Promise<User | UserWithPassword | null> {
+    return this.userRepository.getByName(userName, withPassword)
+  }
     
   async getUser (id: string): Promise<User | null> {
     return await this.userRepository.getById(id)

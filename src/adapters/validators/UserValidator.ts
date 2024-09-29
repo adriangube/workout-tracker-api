@@ -17,6 +17,7 @@ export const UserWithPasswordSchema = UserSchema.extend({
     .max(255, 'Password is too long. Maximum of 255 characters')
 })
 
+
 export const userValidator = async (user: User) => await UserSchema.safeParseAsync(user)
 export const userWithPasswordValidator = async (user: UserWithPassword) => UserWithPasswordSchema.safeParseAsync(user)
 

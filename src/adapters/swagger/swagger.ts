@@ -24,19 +24,19 @@ const doc = {
   produces: [ 'application/json' ],
   definitions: {
     UserCreationBody: {
-      name: 'username',
+      username: 'username',
       email: 'email@gmail.com',
       password: 'password'
     },
     User: {
       id: '1',
-      name: 'username',
+      username: 'username',
       email: 'email@gmail.com'
     },
     Users: [
       {
         id: '1',
-        name: 'username',
+        username: 'username',
         email: 'email@gmail.com'
       }
     ],
@@ -75,6 +75,13 @@ const doc = {
       name: 'Exercise',
       description: 'Description of te exercise',
       muscle_groups_id: [ '1' ]
+    }, 
+    LoginBody: {
+      username: 'username',
+      password: 'password'
+    },
+    LoginResponse: {
+      token: 'token'
     }
   }
 }
