@@ -17,7 +17,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Get user by id",
         "parameters": [
           {
             "name": "id",
@@ -30,7 +30,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get user by id",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -50,7 +50,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Partially update a user",
         "parameters": [
           {
             "name": "id",
@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Partially update a user",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -98,7 +98,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Delete a user",
         "parameters": [
           {
             "name": "id",
@@ -111,7 +111,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete a user"
+            "description": "OK"
           }
         }
       }
@@ -121,10 +121,10 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Get all users",
         "responses": {
           "200": {
-            "description": "Get user list",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -146,10 +146,10 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Create a user",
         "responses": {
           "200": {
-            "description": "Create user",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -198,8 +198,20 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroup"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroup"
+                }
+              }
+            }
           }
         }
       },
@@ -219,8 +231,35 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroup"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroup"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MuscleGroupCreationBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/MuscleGroupCreationBody"
+              }
+            }
           }
         }
       },
@@ -240,8 +279,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -253,8 +292,20 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroups"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroups"
+                }
+              }
+            }
           }
         }
       },
@@ -264,8 +315,35 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroup"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MuscleGroup"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MuscleGroupCreationBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/MuscleGroupCreationBody"
+              }
+            }
           }
         }
       }
@@ -320,84 +398,6 @@
   },
   "components": {
     "schemas": {
-      "user": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "requires": {
-            "type": "array",
-            "example": [
-              "name",
-              "email"
-            ],
-            "items": {
-              "type": "string"
-            }
-          },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "example": "string"
-              },
-              "name": {
-                "type": "string",
-                "example": "string"
-              },
-              "email": {
-                "type": "string",
-                "example": "string"
-              },
-              "password": {
-                "type": "string",
-                "example": "string"
-              }
-            }
-          }
-        },
-        "xml": {
-          "name": "user"
-        }
-      },
-      "errorMessage": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "required": {
-            "type": "array",
-            "example": [
-              "message"
-            ],
-            "items": {
-              "type": "string"
-            }
-          },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "message": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "xml": {
-          "name": "errorMessage"
-        }
-      },
       "UserCreationBody": {
         "type": "object",
         "properties": {
@@ -460,12 +460,53 @@
         "xml": {
           "name": "Users"
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      },
+      "MuscleGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Muscle group"
+          }
+        },
+        "xml": {
+          "name": "MuscleGroup"
+        }
+      },
+      "MuscleGroups": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "name": {
+              "type": "string",
+              "example": "Muscle group"
+            }
+          }
+        },
+        "xml": {
+          "name": "MuscleGroups"
+        }
+      },
+      "MuscleGroupCreationBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "MuscleGroup"
+          }
+        },
+        "xml": {
+          "name": "MuscleGroupCreationBody"
+        }
       }
     }
   }

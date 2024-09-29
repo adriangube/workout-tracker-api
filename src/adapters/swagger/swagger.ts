@@ -31,40 +31,19 @@ const doc = {
         name: 'username',
         email: 'email@gmail.com'
       }
-    ]
-  },
-  components: {
-    schemas: {
-      user: {
-        type: 'object',
-        requires: [
-          'name',
-          'email'
-        ],
-        properties: {
-          id: 'string',
-          name: 'string',
-          email: 'string',
-          password: 'string'
-        }
-      },
-      errorMessage: {
-        type: 'object',
-        required: [
-          'message'
-        ],
-        properties: {
-          message: {
-            type: 'string'
-          }
-        }
-      }
+    ],
+    MuscleGroup: {
+      id: '1',
+      name: 'Muscle group'
     },
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
+    MuscleGroups: [
+      {
+        id: '1',
+        name: 'Muscle group'
       }
+    ],
+    MuscleGroupCreationBody: {
+      name: 'MuscleGroup'
     }
   }
 }
