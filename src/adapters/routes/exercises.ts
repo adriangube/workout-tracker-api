@@ -13,13 +13,15 @@ exercisesRouter.get('/:id', (req, res) => {
 /*  
   #swagger.tags = ['Exercises']
   #swagger.responses[200] = { schema:{ $ref: "#/definitions/Exercise" } } 
+  #swagger.security = [{"bearerAuth": []}]
 */
   exerciseController.getExercise(req, res)
 })
 exercisesRouter.get('/', (req, res) => {
 /*  
   #swagger.tags = ['Exercises']
-  #swagger.responses[200] = { schema:{ $ref: "#/definitions/Exercises" } } 
+  #swagger.responses[200] = { schema:{ $ref: "#/definitions/Exercises" } }
+  #swagger.security = [{"bearerAuth": []}]
 */
   exerciseController.getAllExercises(req, res)
 })
@@ -27,7 +29,8 @@ exercisesRouter.post('/', (req, res) => {
 /*  
   #swagger.tags = ['Exercises']
   #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/ExerciseCreationBody" } }
-  #swagger.responses[200] = { schema:{ $ref: "#/definitions/Exercise" } } 
+  #swagger.responses[200] = { schema:{ $ref: "#/definitions/Exercise" } }
+  #swagger.security = [{"bearerAuth": []}]
 */
   exerciseController.createExercise(req, res)
 })
