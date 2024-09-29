@@ -44,6 +44,29 @@ const doc = {
     ],
     MuscleGroupCreationBody: {
       name: 'MuscleGroup'
+    },
+    Exercise: {
+      id: '1',
+      name: 'Exercise',
+      description: 'Description of the exercise',
+      muscle_groups: [
+        { id: '1', name: 'Muscle group' }
+      ]
+    },
+    Exercises: [
+      {
+        id: '1',
+        name: 'Exercise',
+        description: 'Description of the exercise',
+        muscle_groups: [
+          { id: '1', name: 'Muscle group' }
+        ]
+      }
+    ],
+    ExerciseCreationBody: {
+      name: 'Exercise',
+      description: 'Description of te exercise',
+      muscle_groups_id: [ '1' ]
     }
   }
 }

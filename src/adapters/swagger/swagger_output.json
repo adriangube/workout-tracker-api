@@ -17,7 +17,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Get user by id",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -50,7 +50,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Partially update a user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -98,7 +98,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Delete a user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -121,7 +121,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Get all users",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK",
@@ -146,7 +146,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Create a user",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK",
@@ -365,8 +365,20 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exercise"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exercise"
+                }
+              }
+            }
           }
         }
       }
@@ -378,8 +390,20 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exercises"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exercises"
+                }
+              }
+            }
           }
         }
       },
@@ -389,8 +413,35 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exercise"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exercise"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExerciseCreationBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ExerciseCreationBody"
+              }
+            }
           }
         }
       }
@@ -506,6 +557,106 @@
         },
         "xml": {
           "name": "MuscleGroupCreationBody"
+        }
+      },
+      "Exercise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Exercise"
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of the exercise"
+          },
+          "muscle_groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Muscle group"
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Exercise"
+        }
+      },
+      "Exercises": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "name": {
+              "type": "string",
+              "example": "Exercise"
+            },
+            "description": {
+              "type": "string",
+              "example": "Description of the exercise"
+            },
+            "muscle_groups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Muscle group"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Exercises"
+        }
+      },
+      "ExerciseCreationBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Exercise"
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of te exercise"
+          },
+          "muscle_groups_id": {
+            "type": "array",
+            "example": [
+              "1"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "xml": {
+          "name": "ExerciseCreationBody"
         }
       }
     }
