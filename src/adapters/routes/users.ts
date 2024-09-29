@@ -14,18 +14,7 @@ usersRouter.get('/:id', (res, req) => {
   #swagger.tags = ['Users']
   #swagger.responses[200] = {
       description: "Get user by id",
-      content: {
-          "application/json": {
-              schema:{
-                  $ref: "#/components/schemas/user"
-              },
-              example: {
-                id: '1',
-                name: 'username',
-                email: 'email@gmail.com'
-              }
-          }           
-      }
+      schema:{ $ref: "#/definitions/User" }
   } 
 */
   userController.getUser(res, req)
@@ -36,21 +25,7 @@ usersRouter.get('/', (req, res) => {
   #swagger.tags = ['Users']
   #swagger.responses[200] = {
       description: "Get user list",
-      content: {
-          "application/json": {
-              schema:{
-                "type": "array",
-                $ref: "#/components/schemas/user"
-              },
-              example: [
-                {
-                  id: '1',
-                  name: 'username',
-                  email: 'email@gmail.com'
-                }
-              ]
-          }           
-      }
+      schema:{ "type": "array", $ref: "#/definitions/Users" }
   } 
 */
   userController.getAllUsers(req, res)
@@ -61,33 +36,11 @@ usersRouter.post('/', (req, res) => {
   #swagger.tags = ['Users']
   #swagger.requestBody = {
         required: true,
-        content: {
-            "application/json": {
-                schema: {
-                    $ref: "#/components/schemas/user"
-                },
-                example: {
-                  name: 'username',
-                  email: 'email@gmail.com',
-                  password: 'password'
-                }
-            }
-        }
+        schema: { $ref: "#/definitions/UserCreationBody" }
     }
   #swagger.responses[200] = {
       description: "Create user",
-      content: {
-          "application/json": {
-              schema:{
-                  $ref: "#/components/schemas/user"
-              },
-              example: {
-                id: '1',
-                name: 'username',
-                email: 'email@gmail.com'
-              }
-          }           
-      }
+      schema:{ $ref: "#/definitions/User" }
   } 
 */
   userController.createUser(req, res)
@@ -98,34 +51,12 @@ usersRouter.patch('/:id', (req, res) => {
   #swagger.tags = ['Users']
   #swagger.requestBody = {
         required: true,
-        content: {
-            "application/json": {
-                schema: {
-                    $ref: "#/components/schemas/user"
-                },
-                example: {
-                  name: 'username',
-                  email: 'email@gmail.com',
-                  password: 'password'
-                }
-            }
-        }
+        schema: { $ref: "#/definitions/UserCreationBody" }
     }
     
   #swagger.responses[200] = {
       description: "Partially update a user",
-      content: {
-          "application/json": {
-              schema:{
-                  $ref: "#/components/schemas/user"
-              },
-              example: {
-                id: '1',
-                name: 'username',
-                email: 'email@gmail.com'
-              }
-          }           
-      }
+      schema:{ $ref: "#/definitions/User" }
   } 
 */
   userController.updateUser(req, res)

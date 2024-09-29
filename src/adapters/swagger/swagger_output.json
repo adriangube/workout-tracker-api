@@ -34,12 +34,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
-                },
-                "example": {
-                  "id": "1",
-                  "name": "username",
-                  "email": "email@gmail.com"
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -67,12 +67,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
-                },
-                "example": {
-                  "id": "1",
-                  "name": "username",
-                  "email": "email@gmail.com"
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -83,12 +83,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/user"
-              },
-              "example": {
-                "name": "username",
-                "email": "email@gmail.com",
-                "password": "password"
+                "$ref": "#/components/schemas/UserCreationBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreationBody"
               }
             }
           }
@@ -129,15 +129,14 @@
               "application/json": {
                 "schema": {
                   "type": "array",
-                  "$ref": "#/components/schemas/user"
-                },
-                "example": [
-                  {
-                    "id": "1",
-                    "name": "username",
-                    "email": "email@gmail.com"
-                  }
-                ]
+                  "$ref": "#/components/schemas/Users"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/Users"
+                }
               }
             }
           }
@@ -154,12 +153,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
-                },
-                "example": {
-                  "id": "1",
-                  "name": "username",
-                  "email": "email@gmail.com"
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -170,12 +169,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/user"
-              },
-              "example": {
-                "name": "username",
-                "email": "email@gmail.com",
-                "password": "password"
+                "$ref": "#/components/schemas/UserCreationBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreationBody"
               }
             }
           }
@@ -342,64 +341,26 @@
             "type": "object",
             "properties": {
               "id": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "name": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "email": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "password": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              }
-            }
-          },
-          "example": {
-            "type": "object",
-            "properties": {
-              "id": {
                 "type": "string",
-                "example": "1"
+                "example": "string"
               },
               "name": {
                 "type": "string",
-                "example": "username"
+                "example": "string"
               },
               "email": {
                 "type": "string",
-                "example": "email@gmail.com"
+                "example": "string"
               },
               "password": {
                 "type": "string",
-                "example": "password"
+                "example": "string"
               }
             }
           }
+        },
+        "xml": {
+          "name": "user"
         }
       },
       "errorMessage": {
@@ -432,6 +393,72 @@
               }
             }
           }
+        },
+        "xml": {
+          "name": "errorMessage"
+        }
+      },
+      "UserCreationBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "username"
+          },
+          "email": {
+            "type": "string",
+            "example": "email@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "xml": {
+          "name": "UserCreationBody"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "username"
+          },
+          "email": {
+            "type": "string",
+            "example": "email@gmail.com"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      },
+      "Users": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "name": {
+              "type": "string",
+              "example": "username"
+            },
+            "email": {
+              "type": "string",
+              "example": "email@gmail.com"
+            }
+          }
+        },
+        "xml": {
+          "name": "Users"
         }
       }
     },

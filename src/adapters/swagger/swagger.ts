@@ -12,6 +12,27 @@ const doc = {
       description: ''
     },
   ],
+  consumes: [ 'application/json' ],
+  produces: [ 'application/json' ],
+  definitions: {
+    UserCreationBody: {
+      name: 'username',
+      email: 'email@gmail.com',
+      password: 'password'
+    },
+    User: {
+      id: '1',
+      name: 'username',
+      email: 'email@gmail.com'
+    },
+    Users: [
+      {
+        id: '1',
+        name: 'username',
+        email: 'email@gmail.com'
+      }
+    ]
+  },
   components: {
     schemas: {
       user: {
@@ -21,24 +42,10 @@ const doc = {
           'email'
         ],
         properties: {
-          id: {
-            type: 'string'
-          },
-          name: {
-            type: 'string',
-          },
-          email: {
-            type: 'string',
-          },
-          password: {
-            type: 'string',
-          }
-        },
-        example: {
-          id: '1',
-          name: 'username',
-          email: 'email@gmail.com',
-          password: 'password'
+          id: 'string',
+          name: 'string',
+          email: 'string',
+          password: 'string'
         }
       },
       errorMessage: {
