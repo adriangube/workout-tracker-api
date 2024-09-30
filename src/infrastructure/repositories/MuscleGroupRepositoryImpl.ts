@@ -3,6 +3,19 @@ import { MuscleGroupRepository } from '@domain/repositories/MuscleGroupRepositor
 import { Database } from '@infrastructure/database/client'
 
 export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
+
+  async getByName(name: string): Promise<MuscleGroup | null>{
+    const db = await Database.getConnection()
+
+    const query = {
+      text: 'SELECT id, name FROM muscle_groups WHERE name = $1',
+      values: [ name ]
+    }
+    const response = await db.query<MuscleGroup>(query)
+    await db.end()
+    return response?.rows[0] ?? null
+  }
+
   async getById(id: string): Promise<MuscleGroup | null> {
     const db = await Database.getConnection()
 

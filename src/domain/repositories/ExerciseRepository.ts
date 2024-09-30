@@ -1,6 +1,7 @@
 import { Exercise } from '@domain/entities/exercise'
 
 export interface ExerciseRepository {
+  getByName(name: string): Promise<Exercise | null>
   getById(id: string): Promise<Exercise | null>
   getAll(): Promise<Exercise[]>
   save(exercise: Exercise): Promise<Exercise>

@@ -4,6 +4,10 @@ import { MuscleGroupRepository } from '@domain/repositories/MuscleGroupRepositor
 export class MuscleGroupService {
   constructor(private muscleGroupRepository: MuscleGroupRepository) { }
   
+  async getMuscleGroupByName(name: string): Promise<MuscleGroup | null>{
+    return await this.muscleGroupRepository.getByName(name)
+  }
+
   async getMuscleGroup(id: string): Promise<MuscleGroup | null> {
     return await this.muscleGroupRepository.getById(id)
   }

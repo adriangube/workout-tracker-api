@@ -3,6 +3,35 @@ import { ExerciseRepository } from '@domain/repositories/ExerciseRepository'
 import { Database } from '@infrastructure/database/client'
 
 export class ExercisesRepositoryImpl implements ExerciseRepository {
+  async getByName(name: string): Promise<Exercise | null>{
+    const db = await Database.getConnection()
+    const query = {
+      text: `
+        SELECT e.id,
+        e.name,
+        e.description,
+        CASE
+          WHEN COUNT(mg.id) = 0 THEN NULL
+          ELSE json_agg(
+            json_build_object(
+              'id', mg.id,
+              'name', mg.name
+            )
+          )
+          END as muscle_groups
+        FROM exercises e
+        LEFT JOIN exercise_muscle_groups emg ON e.id = emg.exercise_id
+        LEFT JOIN muscle_groups mg ON mg.id = emg.muscle_group_id
+        WHERE e.name = $1
+        GROUP BY e.id
+      `,
+      values: [ name ]
+    }
+    const response = await db.query<Exercise>(query)
+    await db.end()
+    return response?.rows[0]
+  }
+
   async getById(id: string): Promise<Exercise | null> {
     const db = await Database.getConnection()
     const query = {
