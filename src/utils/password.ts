@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import { config } from '@config/index'
+import { InternalServerError } from '@application/errors'
 
 export const hashPassword = async (password: string): Promise<string> => {
   const saltRounds = config.SALT_ROUNDS
@@ -7,5 +8,9 @@ export const hashPassword = async (password: string): Promise<string> => {
 }
 
 export const isPasswordValid = async (password: string, userPassword: string): Promise<boolean> => {
-  return bcrypt.compare(password, userPassword)
+  try {
+    return bcrypt.compare(password, userPassword)
+  } catch {
+    throw new InternalServerError('Error decoding the password')
+  }
 }

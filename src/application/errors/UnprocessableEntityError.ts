@@ -1,8 +1,8 @@
-export class UnprocessableEntityError extends Error {
-  public statusCode
+import { AppError } from './AppError'
+
+export class UnprocessableEntityError extends AppError {
   constructor(message = 'Unprocessable Entity: The data provided is invalid.') {
-    super(message)
+    super(message, 422)
     this.name = 'UnprocessableEntityError'
-    this.statusCode = 422
   }
 }

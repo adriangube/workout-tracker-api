@@ -1,8 +1,8 @@
-export class ForbiddenError extends Error {
-  public statusCode
+import { AppError } from './AppError'
+
+export class ForbiddenError extends AppError {
   constructor(message = 'Forbidden: You do not have permission to access this resource.') {
-    super(message)
+    super(message, 403)
     this.name = 'ForbiddenError'
-    this.statusCode = 403
   }
 }

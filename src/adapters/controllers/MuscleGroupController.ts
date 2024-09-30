@@ -4,26 +4,25 @@ import { muscleGroupValidator } from '@adapters/validators/MuscleGroupValidator'
 import { uuidValidator } from '@adapters/validators/UUIDValidator'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
-import { InternalServerError } from '@application/errors/InternalServerError'
 import { ConflictError } from '@application/errors/ConflictError'
 
 export class MuscleGroupController {
   constructor(private muscleGroupService: MuscleGroupService) { }
 
   async getMuscleGroup(req: Request, res: Response, next: NextFunction) { 
-    const params = req.params
-    const validatorResult = await uuidValidator(params.id)
-    if (validatorResult.error) {
-      return next(new BadRequestError(validatorResult?.error?.message))
-    }
     try {
+      const params = req.params
+      const validatorResult = await uuidValidator(params.id)
+      if (validatorResult.error) {
+        throw new BadRequestError(validatorResult?.error?.message)
+      }
       const muscleGroup = await this.muscleGroupService.getMuscleGroup(validatorResult.data)
       if (muscleGroup) {
         return res.status(200).send(muscleGroup)
       }
-      return next(new NotFoundError('Muscle group not found'))
-    } catch {
-      return next(new InternalServerError())
+      throw new NotFoundError('Muscle group not found')
+    } catch(e) {
+      next(e)
     }
   }
 
@@ -31,27 +30,28 @@ export class MuscleGroupController {
     try {
       const muscleGroups = await this.muscleGroupService.getAllMuscleGroups()
       return res.status(200).send(muscleGroups)
-    } catch {
-      return next(new InternalServerError())
+    } catch(e) {
+      next(e)
     }
   }
 
   async createMuscleGroup(req: Request, res: Response, next: NextFunction) {
-    const validatorResult = await muscleGroupValidator(req.body)
-    if (validatorResult.error) {
-      return next(new BadRequestError(validatorResult?.error?.message))
-    }
+ 
     try {
+      const validatorResult = await muscleGroupValidator(req.body)
+      if (validatorResult.error) {
+        throw new BadRequestError(validatorResult?.error?.message)
+      }
       const exists = await this.muscleGroupService.getMuscleGroupByName(validatorResult.data.name)
       if (exists) {
-        return next(new ConflictError(
+        throw new ConflictError(
           `Conflict: A muscle group with the name "${validatorResult.data.name}" already exists.`
-        ))
+        )
       }
       const muscleGroup = await this.muscleGroupService.createMuscleGroup(validatorResult.data)
       return res.status(200).send(muscleGroup)
-    } catch {
-      return next(new InternalServerError())
+    } catch(e) {
+      next(e)
     } 
   }
 
@@ -61,16 +61,16 @@ export class MuscleGroupController {
   }
 
   async deleteMuscleGroup(req: Request, res: Response, next: NextFunction) {
-    const params = req.params
-    const validatorResult = await uuidValidator(params.id)
-    if (validatorResult.error) {
-      return next(new BadRequestError(validatorResult?.error?.message))
-    }
     try {
+      const params = req.params
+      const validatorResult = await uuidValidator(params.id)
+      if (validatorResult.error) {
+        throw new BadRequestError(validatorResult?.error?.message)
+      }      
       await this.muscleGroupService.deleteMuscleGroup(validatorResult.data)
       return res.status(200).send({ message: 'Muscle group deleted' })
-    } catch {
-      return next(new InternalServerError())
+    } catch(e) {
+      next(e)
     }
   }
 }

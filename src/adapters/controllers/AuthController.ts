@@ -7,7 +7,6 @@ import { UserWithPassword } from '@domain/entities/user'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
 import { UnauthorizedError } from '@application/errors/UnauthorizedError'
-import { InternalServerError } from '@application/errors/InternalServerError'
 
 export class AuthController {
   constructor(
@@ -16,31 +15,24 @@ export class AuthController {
   ) { }
   
   async login(req: Request, res: Response, next: NextFunction) {
-    const validatorResult = await loginValidator(req.body)
-    if (validatorResult.error) {
-      return next(new BadRequestError(validatorResult?.error?.message))
-    }
+    
     try {
+      const validatorResult = await loginValidator(req.body)
+      if (validatorResult.error) {
+        throw new BadRequestError(validatorResult?.error?.message)
+      }
       const user = await this.userService.getUserByName(validatorResult.data.username, true)
       if (!user) {
-        return next(new NotFoundError('User not found'))
+        throw new NotFoundError('User not found')
       }
-      try {
-        const isValid = isPasswordValid(validatorResult.data.password, (user as UserWithPassword).password)
-        if (!isValid) {
-          return next(new UnauthorizedError('Invalid credentials. Please check your username and password.'))
-        }
-      } catch {
-        return next(new InternalServerError('Error decoding the password'))
+      const isValid = isPasswordValid(validatorResult.data.password, (user as UserWithPassword).password)
+      if (!isValid) {
+        throw new UnauthorizedError('Invalid credentials. Please check your username and password.')
       }
-      try {
-        const token = await this.authService.createToken(user.id as string, user.username)
-        return res.status(200).send({ token })
-      } catch { 
-        return next(new InternalServerError('Error generating token'))
-      }
-    }catch{
-      return next(new InternalServerError())
+      const token = await this.authService.createToken(user.id as string, user.username)
+      return res.status(200).send({ token })
+    }catch(e){
+      next(e)
     }
   }
 }

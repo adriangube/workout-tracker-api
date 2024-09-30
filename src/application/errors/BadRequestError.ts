@@ -1,8 +1,8 @@
-export class BadRequestError extends Error {
-  public statusCode
+import { AppError } from './AppError'
+
+export class BadRequestError extends AppError {
   constructor(message = 'Bad Request: Invalid or missing parameters.') {
-    super(message)
+    super(message, 400)
     this.name = 'BadRequestError'
-    this.statusCode = 400
   }
 }

@@ -1,8 +1,8 @@
-export class ConflictError extends Error {
-  public statusCode
+import { AppError } from './AppError'
+
+export class ConflictError extends AppError {
   constructor(message = 'Conflict: Resource already exists or is in conflict.') {
-    super(message)
+    super(message, 409)
     this.name = 'ConflictError'
-    this.statusCode = 409
   }
 }

@@ -1,8 +1,8 @@
-export class TooManyRequestsError extends Error {
-  public statusCode
+import { AppError } from './AppError'
+
+export class TooManyRequestsError extends AppError {
   constructor(message = 'Too Many Requests: You have exceeded the rate limit.') {
-    super(message)
+    super(message, 429)
     this.name = 'TooManyRequestsError'
-    this.statusCode = 429
   }
 }
