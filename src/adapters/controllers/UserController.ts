@@ -5,6 +5,7 @@ import { userWithPasswordValidator } from '@adapters/validators/UserValidator'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
 import { InternalServerError } from '@application/errors/InternalServerError'
+import { ConflictError } from '@application/errors/ConflictError'
 
 export class UserController {
   constructor(private userService: UserService) { }
@@ -41,6 +42,12 @@ export class UserController {
       return next(new BadRequestError(validatorResult?.error?.message))
     }
     try {
+      const exists = await this.userService.getUserByName(validatorResult.data.username)
+      if (exists) {
+        return next(new ConflictError(
+          `Conflict: A user with the username "${validatorResult.data.username} already exists."`
+        ))
+      }
       const user = await this.userService.createUser(validatorResult.data)
       return res.status(200).send(user)
     } catch {

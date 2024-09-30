@@ -5,6 +5,10 @@ import { CreateExerciseDTO } from './dto/exercise.dto'
 export class ExerciseService {
   constructor(private exerciseRepository: ExerciseRepository) { }
   
+  async getExerciseByName(name: string): Promise<Exercise | null>{
+    return await this.exerciseRepository.getByName(name)
+  }
+
   async getExercise(id: string): Promise<Exercise | null>{
     return await this.exerciseRepository.getById(id)
   }

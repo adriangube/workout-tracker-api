@@ -5,6 +5,7 @@ import { uuidValidator } from '@adapters/validators/UUIDValidator'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
 import { InternalServerError } from '@application/errors/InternalServerError'
+import { ConflictError } from '@application/errors/ConflictError'
 
 export class MuscleGroupController {
   constructor(private muscleGroupService: MuscleGroupService) { }
@@ -41,6 +42,12 @@ export class MuscleGroupController {
       return next(new BadRequestError(validatorResult?.error?.message))
     }
     try {
+      const exists = await this.muscleGroupService.getMuscleGroupByName(validatorResult.data.name)
+      if (exists) {
+        return next(new ConflictError(
+          `Conflict: A muscle group with the name "${validatorResult.data.name}" already exists.`
+        ))
+      }
       const muscleGroup = await this.muscleGroupService.createMuscleGroup(validatorResult.data)
       return res.status(200).send(muscleGroup)
     } catch {

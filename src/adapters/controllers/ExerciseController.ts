@@ -5,10 +5,11 @@ import { createExerciseValidator } from '@adapters/validators/ExerciseValidator'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
 import { InternalServerError } from '@application/errors/InternalServerError'
+import { ConflictError } from '@application/errors/ConflictError'
 
 export class ExerciseController {
   constructor(private exerciseService: ExerciseService) { }
-  
+
   async getExercise(req: Request, res: Response, next: NextFunction) {
     const params = req.params
     const validatorResult = await uuidValidator(params.id)
@@ -42,6 +43,12 @@ export class ExerciseController {
     }
 
     try {
+      const exists = await this.exerciseService.getExerciseByName(validatorResult.data.name)
+      if (exists) {
+        return next(
+          new ConflictError(`Conflict: A exercise with the name "${ validatorResult.data.name }" already exists.`)
+        )
+      }
       const exercise = await this.exerciseService.createExercise(validatorResult.data)
       res.status(200).send(exercise)
       
