@@ -1,69 +1,69 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { MuscleGroupService } from '@application/services/MuscleGroupService'
 import { muscleGroupValidator } from '@adapters/validators/MuscleGroupValidator'
 import { uuidValidator } from '@adapters/validators/UUIDValidator'
+import { BadRequestError } from '@application/errors/BadRequestError'
+import { NotFoundError } from '@application/errors/NotFoundError'
+import { InternalServerError } from '@application/errors/InternalServerError'
 
 export class MuscleGroupController {
   constructor(private muscleGroupService: MuscleGroupService) { }
 
-  async getMuscleGroup(req: Request, res: Response) { 
+  async getMuscleGroup(req: Request, res: Response, next: NextFunction) { 
     const params = req.params
     const validatorResult = await uuidValidator(params.id)
     if (validatorResult.error) {
-      return res.status(400).send(validatorResult.error)
+      return next(new BadRequestError(validatorResult?.error?.message))
     }
     try {
       const muscleGroup = await this.muscleGroupService.getMuscleGroup(validatorResult.data)
       if (muscleGroup) {
         return res.status(200).send(muscleGroup)
       }
-      return res.status(404).send({ message: 'Muscle group not found' })
-    } catch (e) {
-      console.error(e)
-      return res.status(500).send({ message: 'Internal server error' })
+      return next(new NotFoundError('Muscle group not found'))
+    } catch {
+      return next(new InternalServerError())
     }
   }
 
-  async getAllMuscleGroups(req: Request, res: Response) {
+  async getAllMuscleGroups(req: Request, res: Response, next: NextFunction) {
     try {
       const muscleGroups = await this.muscleGroupService.getAllMuscleGroups()
       return res.status(200).send(muscleGroups)
-    } catch (e) {
-      console.error(e)
-      return res.status(500).send({ message: 'Internal server error' })
+    } catch {
+      return next(new InternalServerError())
     }
   }
 
-  async createMuscleGroup(req: Request, res: Response) {
+  async createMuscleGroup(req: Request, res: Response, next: NextFunction) {
     const validatorResult = await muscleGroupValidator(req.body)
-    if(validatorResult.error) {
-      return res.status(400).send(validatorResult.error)
+    if (validatorResult.error) {
+      return next(new BadRequestError(validatorResult?.error?.message))
     }
     try {
       const muscleGroup = await this.muscleGroupService.createMuscleGroup(validatorResult.data)
       return res.status(200).send(muscleGroup)
-    } catch (e) {
-      console.error(e)
-      return res.status(500).send({ message: 'Internal server error' })
+    } catch {
+      return next(new InternalServerError())
     } 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async updateMuscleGroup(req: Request, res: Response) {
+  async updateMuscleGroup(req: Request, res: Response, next: NextFunction) {
     throw new Error('Method not implemented.')
   }
 
-  async deleteMuscleGroup(req: Request, res: Response) {
+  async deleteMuscleGroup(req: Request, res: Response, next: NextFunction) {
     const params = req.params
     const validatorResult = await uuidValidator(params.id)
     if (validatorResult.error) {
-      return res.status(400).send(validatorResult.error)
+      return next(new BadRequestError(validatorResult?.error?.message))
     }
     try {
       await this.muscleGroupService.deleteMuscleGroup(validatorResult.data)
       return res.status(200).send({ message: 'Muscle group deleted' })
-    } catch (e) {
-      console.error(e)
+    } catch {
+      return next(new InternalServerError())
     }
   }
 }
