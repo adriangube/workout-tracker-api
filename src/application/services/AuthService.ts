@@ -1,9 +1,14 @@
 import jwt, { Secret } from 'jsonwebtoken'
 import { config } from '@config/index'
 import { InternalServerError } from '@application/errors'
+import { UserRepository } from '@domain/repositories/UserRepository'
 
 
 export class AuthService { 
+
+  constructor(
+    private userRepository: UserRepository
+  ){}
 
   createToken(id: string, userName: string): string {
     try {
@@ -22,5 +27,9 @@ export class AuthService {
     }
   }
 
+  async isAdminUser(id: string, userName: string): Promise<boolean> {
+    const adminUser = await this.userRepository.getByName(config.ADMIN_USERNAME as string)
+    return adminUser?.id === id && adminUser.username === userName
+  }
   
 }

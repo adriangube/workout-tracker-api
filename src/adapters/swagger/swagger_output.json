@@ -11,6 +11,24 @@
       "description": ""
     }
   ],
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Exercises"
+    },
+    {
+      "name": "Muscle Groups"
+    },
+    {
+      "name": "Internal",
+      "description": "Restricted endpoints for internal usage only."
+    }
+  ],
   "paths": {
     "/api/users/{id}": {
       "get": {
@@ -43,12 +61,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -87,12 +99,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -118,7 +124,7 @@
       },
       "delete": {
         "tags": [
-          "Users"
+          "Internal"
         ],
         "description": "",
         "parameters": [
@@ -134,12 +140,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -152,7 +152,7 @@
     "/api/users/": {
       "get": {
         "tags": [
-          "Users"
+          "Internal"
         ],
         "description": "",
         "responses": {
@@ -172,12 +172,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -206,12 +200,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -267,12 +255,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -283,7 +265,7 @@
       },
       "patch": {
         "tags": [
-          "Muscle Groups"
+          "Internal"
         ],
         "description": "",
         "parameters": [
@@ -311,12 +293,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -342,7 +318,7 @@
       },
       "delete": {
         "tags": [
-          "Muscle Groups"
+          "Internal"
         ],
         "description": "",
         "parameters": [
@@ -358,12 +334,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -394,12 +364,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -410,7 +374,7 @@
       },
       "post": {
         "tags": [
-          "Muscle Groups"
+          "Internal"
         ],
         "description": "",
         "responses": {
@@ -428,12 +392,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -489,12 +447,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -525,12 +477,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -541,7 +487,7 @@
       },
       "post": {
         "tags": [
-          "Exercises"
+          "Internal"
         ],
         "description": "",
         "responses": {
@@ -559,12 +505,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "security": [
@@ -589,7 +529,7 @@
         }
       }
     },
-    "/api/auth/login": {
+    "/api/auth/token": {
       "post": {
         "tags": [
           "Auth"
@@ -610,12 +550,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
         },
         "requestBody": {
