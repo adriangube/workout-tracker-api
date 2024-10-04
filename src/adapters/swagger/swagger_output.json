@@ -11,6 +11,24 @@
       "description": ""
     }
   ],
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Exercises"
+    },
+    {
+      "name": "Muscle Groups"
+    },
+    {
+      "name": "Internal",
+      "description": "Restricted endpoints for internal usage only."
+    }
+  ],
   "paths": {
     "/api/users/{id}": {
       "get": {
@@ -511,7 +529,7 @@
         }
       }
     },
-    "/api/auth/login": {
+    "/api/auth/token": {
       "post": {
         "tags": [
           "Auth"

@@ -6,6 +6,24 @@ const doc = {
     title: 'Workout Tracker API',
     description: 'A workout tracker made for you'
   },
+  tags: [
+    {
+      name: 'Auth'
+    },
+    {
+      name: 'Users'
+    },
+    {
+      name: 'Exercises'
+    },
+    {
+      name: 'Muscle Groups'
+    },
+    {
+      name: 'Internal',
+      description: 'Restricted endpoints for internal usage only.'
+    }
+  ],
   servers: [
     {
       url: 'http://localhost:3000',
