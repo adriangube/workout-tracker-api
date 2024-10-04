@@ -2,12 +2,16 @@ import express, { NextFunction, Request, Response }  from 'express'
 import { MuscleGroupRepositoryImpl } from '@infrastructure/repositories/MuscleGroupRepositoryImpl'
 import { MuscleGroupService } from '@application/services/MuscleGroupService'
 import { MuscleGroupController } from '@adapters/controllers/MuscleGroupController'
+import { UserRepositoryImpl } from '@infrastructure/repositories/UserRepositoryImpl'
+import { AuthService } from '@application/services/AuthService'
 
 export const muscleGroupRouter = express.Router()
 
 const muscleGroupRepository = new MuscleGroupRepositoryImpl()
+const userRepository = new UserRepositoryImpl()
 const muscleGroupService = new MuscleGroupService(muscleGroupRepository)
-const muscleGroupController = new MuscleGroupController(muscleGroupService)
+const authService = new AuthService(userRepository)
+const muscleGroupController = new MuscleGroupController(muscleGroupService, authService)
 
 muscleGroupRouter.get('/:id', (req: Request, res: Response, next: NextFunction) => {
 /*  

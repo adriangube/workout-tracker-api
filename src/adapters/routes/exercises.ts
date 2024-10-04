@@ -2,12 +2,16 @@ import express, { NextFunction, Request, Response } from 'express'
 import { ExerciseController } from '@adapters/controllers/ExerciseController'
 import { ExerciseService } from '@application/services/ExerciseService'
 import { ExercisesRepositoryImpl } from '@infrastructure/repositories/ExercisesRepositoryImpl'
+import { AuthService } from '@application/services/AuthService'
+import { UserRepositoryImpl } from '@infrastructure/repositories/UserRepositoryImpl'
 
 export const exercisesRouter = express.Router()
 
 const exerciseRepository = new ExercisesRepositoryImpl()
 const exerciseService = new ExerciseService(exerciseRepository)
-const exerciseController = new ExerciseController(exerciseService)
+const userRepository = new UserRepositoryImpl()
+const authService = new AuthService(userRepository)
+const exerciseController = new ExerciseController(exerciseService, authService)
 
 exercisesRouter.get('/:id', (req: Request, res: Response, next: NextFunction) => {
 /*  

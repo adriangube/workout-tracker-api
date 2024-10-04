@@ -5,9 +5,14 @@ import { createExerciseValidator } from '@adapters/validators/ExerciseValidator'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
 import { ConflictError } from '@application/errors/ConflictError'
+import { AuthService } from '@application/services/AuthService'
+import { UnauthorizedError } from '@application/errors'
 
 export class ExerciseController {
-  constructor(private exerciseService: ExerciseService) { }
+  constructor(
+    private exerciseService: ExerciseService,
+    private authService: AuthService
+  ) { }
 
   async getExercise(req: Request, res: Response, next: NextFunction) {
     try {
@@ -38,6 +43,13 @@ export class ExerciseController {
   async createExercise(req: Request, res: Response, next: NextFunction) {
     
     try {
+      const isAdminUser = await this.authService.isAdminUser(
+        req.session?.user?.id as string,
+        req.session?.user?.userName as string
+      )
+      if (!isAdminUser) {
+        throw new UnauthorizedError()
+      }
       const validatorResult = await createExerciseValidator(req.body)
       if (validatorResult.error) {
         throw new BadRequestError(validatorResult?.error?.message)

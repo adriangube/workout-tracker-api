@@ -5,9 +5,14 @@ import { userWithPasswordValidator } from '@adapters/validators/UserValidator'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
 import { ConflictError } from '@application/errors/ConflictError'
+import { AuthService } from '@application/services/AuthService'
+import { UnauthorizedError } from '@application/errors'
 
 export class UserController {
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) { }
     
   async getUser(req: Request, res: Response, next: NextFunction) {
     try {
@@ -28,6 +33,13 @@ export class UserController {
 
   async getAllUsers(req: Request, res: Response, next: NextFunction) {
     try {
+      const isAdminUser = await this.authService.isAdminUser(
+        req.session?.user?.id as string,
+        req.session?.user?.userName as string
+      )
+      if (!isAdminUser) {
+        throw new UnauthorizedError()
+      }
       const users = await this.userService.getAllUsers()
       return res.status(200).send(users)
     } catch(e) {
@@ -61,6 +73,13 @@ export class UserController {
 
   async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
+      const isAdminUser = await this.authService.isAdminUser(
+        req.session?.user?.id as string,
+        req.session?.user?.userName as string
+      )
+      if (!isAdminUser) {
+        throw new UnauthorizedError()
+      }
       const params = req.params
       const validatorResult = await uuidValidator(params.id)
       if (validatorResult.error) {

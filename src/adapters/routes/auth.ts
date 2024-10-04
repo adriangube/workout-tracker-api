@@ -8,7 +8,7 @@ export const authRouter = express.Router()
 
 const userRepository = new UserRepositoryImpl()
 const userService = new UserService(userRepository)
-const authService = new AuthService()
+const authService = new AuthService(userRepository)
 const authController = new AuthController(userService, authService)
 
 authRouter.post('/login', (req: Request, res: Response, next: NextFunction) => {
