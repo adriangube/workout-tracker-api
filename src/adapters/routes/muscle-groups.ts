@@ -31,7 +31,7 @@ muscleGroupRouter.get('/', (req: Request, res: Response, next: NextFunction) => 
 })
 muscleGroupRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Muscle Groups']
+  #swagger.tags = ['Internal']
   #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/MuscleGroupCreationBody" } }
   #swagger.responses[200] = { schema:{ $ref: "#/definitions/MuscleGroup" } }
   #swagger.security = [{"bearerAuth": []}]
@@ -40,7 +40,7 @@ muscleGroupRouter.post('/', (req: Request, res: Response, next: NextFunction) =>
 })
 muscleGroupRouter.patch('/:id', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Muscle Groups']
+  #swagger.tags = ['Internal']
   #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/MuscleGroupCreationBody" } }
   #swagger.responses[200] = { schema:{ $ref: "#/definitions/MuscleGroup" } }
   #swagger.security = [{"bearerAuth": []}]
@@ -49,7 +49,7 @@ muscleGroupRouter.patch('/:id', (req: Request, res: Response, next: NextFunction
 }) 
 muscleGroupRouter.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Muscle Groups']
+  #swagger.tags = ['Internal']
   #swagger.responses[200] = {}
   #swagger.security = [{"bearerAuth": []}]
 */

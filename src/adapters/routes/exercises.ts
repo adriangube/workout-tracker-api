@@ -31,7 +31,7 @@ exercisesRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
 })
 exercisesRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Exercises']
+  #swagger.tags = ['Internal']
   #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/ExerciseCreationBody" } }
   #swagger.responses[200] = { schema:{ $ref: "#/definitions/Exercise" } }
   #swagger.security = [{"bearerAuth": []}]

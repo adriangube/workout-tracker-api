@@ -22,7 +22,7 @@ usersRouter.get('/:id', (res: Request, req: Response, next: NextFunction) => {
 
 usersRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Users']
+  #swagger.tags = ['Internal']
   #swagger.responses[200] = { schema:{ "type": "array", $ref: "#/definitions/Users" } }
   #swagger.security = [{"bearerAuth": []}]
 */
@@ -51,7 +51,7 @@ usersRouter.patch('/:id', (req: Request, res: Response, next: NextFunction) => {
 
 usersRouter.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Users']
+  #swagger.tags = ['Internal']
   #swagger.responses[200] = { }
   #swagger.security = [{"bearerAuth": []}]
 */
