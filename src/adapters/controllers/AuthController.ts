@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { AuthService } from '@application/services/AuthService'
 import { UserService } from '@application/services/UserService'
-import { loginValidator } from '@adapters/validators/AuthValidator'
+import { tokenValidator } from '@adapters/validators/AuthValidator'
 import { isPasswordValid } from '@utils/password'
 import { UserWithPassword } from '@domain/entities/user'
 import { BadRequestError } from '@application/errors/BadRequestError'
@@ -14,10 +14,10 @@ export class AuthController {
     private authService: AuthService
   ) { }
   
-  async login(req: Request, res: Response, next: NextFunction) {
+  async token(req: Request, res: Response, next: NextFunction) {
     
     try {
-      const validatorResult = await loginValidator(req.body)
+      const validatorResult = await tokenValidator(req.body)
       if (validatorResult.error) {
         throw new BadRequestError(validatorResult?.error?.message)
       }

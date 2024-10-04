@@ -5,9 +5,14 @@ import { uuidValidator } from '@adapters/validators/UUIDValidator'
 import { BadRequestError } from '@application/errors/BadRequestError'
 import { NotFoundError } from '@application/errors/NotFoundError'
 import { ConflictError } from '@application/errors/ConflictError'
+import { AuthService } from '@application/services/AuthService'
+import { UnauthorizedError } from '@application/errors'
 
 export class MuscleGroupController {
-  constructor(private muscleGroupService: MuscleGroupService) { }
+  constructor(
+    private muscleGroupService: MuscleGroupService,
+    private authService: AuthService
+  ) { }
 
   async getMuscleGroup(req: Request, res: Response, next: NextFunction) { 
     try {
@@ -38,6 +43,13 @@ export class MuscleGroupController {
   async createMuscleGroup(req: Request, res: Response, next: NextFunction) {
  
     try {
+      const isAdminUser = await this.authService.isAdminUser(
+        req.session?.user?.id as string,
+        req.session?.user?.userName as string
+      )
+      if (!isAdminUser) {
+        throw new UnauthorizedError()
+      }
       const validatorResult = await muscleGroupValidator(req.body)
       if (validatorResult.error) {
         throw new BadRequestError(validatorResult?.error?.message)
@@ -62,6 +74,13 @@ export class MuscleGroupController {
 
   async deleteMuscleGroup(req: Request, res: Response, next: NextFunction) {
     try {
+      const isAdminUser = await this.authService.isAdminUser(
+        req.session?.user?.id as string,
+        req.session?.user?.userName as string
+      )
+      if (!isAdminUser) {
+        throw new UnauthorizedError()
+      }
       const params = req.params
       const validatorResult = await uuidValidator(params.id)
       if (validatorResult.error) {

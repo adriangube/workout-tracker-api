@@ -2,12 +2,14 @@ import express, { NextFunction, Request, Response }  from 'express'
 import { UserRepositoryImpl } from '@infrastructure/repositories/UserRepositoryImpl'
 import { UserService } from '@application/services/UserService'
 import { UserController } from '@adapters/controllers/UserController'
+import { AuthService } from '@application/services/AuthService'
 
 export const usersRouter = express.Router() 
 
 const userRepository = new UserRepositoryImpl()
 const userService = new UserService(userRepository)
-const userController = new UserController(userService)
+const authService = new AuthService(userRepository)
+const userController = new UserController(userService, authService)
 
 usersRouter.get('/:id', (res: Request, req: Response, next: NextFunction) => {
   /*  
@@ -20,7 +22,7 @@ usersRouter.get('/:id', (res: Request, req: Response, next: NextFunction) => {
 
 usersRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Users']
+  #swagger.tags = ['Internal']
   #swagger.responses[200] = { schema:{ "type": "array", $ref: "#/definitions/Users" } }
   #swagger.security = [{"bearerAuth": []}]
 */
@@ -49,7 +51,7 @@ usersRouter.patch('/:id', (req: Request, res: Response, next: NextFunction) => {
 
 usersRouter.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
 /*  
-  #swagger.tags = ['Users']
+  #swagger.tags = ['Internal']
   #swagger.responses[200] = { }
   #swagger.security = [{"bearerAuth": []}]
 */
