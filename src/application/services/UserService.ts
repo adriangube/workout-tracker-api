@@ -1,5 +1,5 @@
 import { UserRepository } from '@domain/repositories/UserRepository'
-import { User, UserWithPassword } from '@domain/entities/user'
+import { User, UserData, UserWithPassword } from '@domain/entities/user'
 import { hashPassword } from '@utils/password'
 
 
@@ -24,7 +24,7 @@ export class UserService {
     return await this.userRepository.save(userWithHashedPassword)
   }
 
-  async updateUser (user: UserWithPassword): Promise<User> {
+  async updateUser (user: UserData): Promise<User> {
     return await this.userRepository.patch(user)
   }
 
