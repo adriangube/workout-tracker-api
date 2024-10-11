@@ -1,11 +1,21 @@
-export interface WorkoutTemplateData {
-  template_id: string
-  exerciseId: string
+
+export interface WorkoutTemplateExerciseCreation {
   sets?: number
   reps?: number
   weight?: number
+  exercise_id: string
+  template_id: string
 }
 
-export interface WorkoutTemplateExercises extends WorkoutTemplateData{
+export interface WorkoutTemplateExerciseData {
+  template_id: string
+  sets?: number
+  reps?: number
+  weight?: number
+  name: string
+  description: string
+}
+
+export interface WorkoutTemplateExercise extends WorkoutTemplateExerciseData{
   id: string
 }
