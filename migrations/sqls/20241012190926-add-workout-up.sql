@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS workout(
+CREATE TABLE IF NOT EXISTS workouts(
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id uuid NOT NULL REFERENCES users(id),
   template_id uuid NOT NULL REFERENCES workout_templates(id),
