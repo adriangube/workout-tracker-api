@@ -1,4 +1,4 @@
-import { MuscleGroup } from '@domain/entities/muscleGroup'
+import { MuscleGroup, MuscleGroupData } from '@domain/entities/muscleGroup'
 import { MuscleGroupRepository } from '@domain/repositories/MuscleGroupRepository'
 
 export class MuscleGroupService {
@@ -16,11 +16,11 @@ export class MuscleGroupService {
     return await this.muscleGroupRepository.getAll()
   }
 
-  async createMuscleGroup(muscleGroup: MuscleGroup): Promise<MuscleGroup> {
+  async createMuscleGroup(muscleGroup: MuscleGroupData): Promise<MuscleGroup> {
     return await this.muscleGroupRepository.save(muscleGroup)
   }
 
-  async updateMuscleGroup(muscleGroup: MuscleGroup): Promise<MuscleGroup> {
+  async updateMuscleGroup(muscleGroup: MuscleGroupData): Promise<MuscleGroup> {
     return await this.muscleGroupRepository.patch(muscleGroup)
   }
 

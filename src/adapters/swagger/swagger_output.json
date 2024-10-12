@@ -25,6 +25,12 @@
       "name": "Muscle Groups"
     },
     {
+      "name": "Workout Template"
+    },
+    {
+      "name": "Workout Template Exercises"
+    },
+    {
       "name": "Internal",
       "description": "Restricted endpoints for internal usage only."
     }
@@ -222,6 +228,388 @@
             }
           }
         }
+      }
+    },
+    "/api/users/{id}/workout-templates": {
+      "get": {
+        "tags": [
+          "Workout Template"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllWorkoutTemplates"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllWorkoutTemplates"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Workout Template"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplate"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplate"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkoutTemplateBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkoutTemplateBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}/workout-templates/{templateId}": {
+      "get": {
+        "tags": [
+          "Workout Template"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplate"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplate"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Workout Template"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/users/{id}/workout-templates/{templateId}/exercises": {
+      "get": {
+        "tags": [
+          "Workout Template Exercises"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplateExercises"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplateExercises"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Workout Template Exercises"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplateExercise"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplateExercise"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutTemplateExerciseCreationBody"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutTemplateExerciseCreationBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}/workout-templates/{templateId}/exercises/{templateExerciseId}": {
+      "get": {
+        "tags": [
+          "Workout Template Exercises"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateExerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplateExercise"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutTemplateExercise"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Workout Template Exercises"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateExerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/muscle-groups/{id}": {
@@ -814,6 +1202,264 @@
         },
         "xml": {
           "name": "LoginResponse"
+        }
+      },
+      "AllWorkoutTemplates": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "user_id": {
+              "type": "string",
+              "example": "2"
+            },
+            "name": {
+              "type": "string",
+              "example": "Workout template name"
+            },
+            "exercises": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "3"
+                  },
+                  "template_id": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "sets": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "reps": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "weight": {
+                    "type": "number",
+                    "example": 15
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Exercise"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Description of the exercise"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "AllWorkoutTemplates"
+        }
+      },
+      "WorkoutTemplate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "user_id": {
+            "type": "string",
+            "example": "2"
+          },
+          "name": {
+            "type": "string",
+            "example": "Workout template name"
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "3"
+                },
+                "template_id": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "sets": {
+                  "type": "number",
+                  "example": 3
+                },
+                "reps": {
+                  "type": "number",
+                  "example": 10
+                },
+                "weight": {
+                  "type": "number",
+                  "example": 15
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Exercise"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Description of the exercise"
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "WorkoutTemplate"
+        }
+      },
+      "CreateWorkoutTemplateBody": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "example": "2"
+          },
+          "name": {
+            "type": "string",
+            "example": "Workout template name"
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "exercise_id": {
+                  "type": "string",
+                  "example": "3"
+                },
+                "sets": {
+                  "type": "number",
+                  "example": 3
+                },
+                "reps": {
+                  "type": "number",
+                  "example": 15
+                },
+                "weight": {
+                  "type": "number",
+                  "example": 25
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "CreateWorkoutTemplateBody"
+        }
+      },
+      "WorkoutTemplateExercise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "3"
+          },
+          "template_id": {
+            "type": "string",
+            "example": "1"
+          },
+          "sets": {
+            "type": "number",
+            "example": 3
+          },
+          "reps": {
+            "type": "number",
+            "example": 10
+          },
+          "weight": {
+            "type": "number",
+            "example": 15
+          },
+          "name": {
+            "type": "string",
+            "example": "Exercise"
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of the exercise"
+          }
+        },
+        "xml": {
+          "name": "WorkoutTemplateExercise"
+        }
+      },
+      "WorkoutTemplateExercises": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "3"
+            },
+            "template_id": {
+              "type": "string",
+              "example": "1"
+            },
+            "sets": {
+              "type": "number",
+              "example": 3
+            },
+            "reps": {
+              "type": "number",
+              "example": 10
+            },
+            "weight": {
+              "type": "number",
+              "example": 15
+            },
+            "name": {
+              "type": "string",
+              "example": "Exercise"
+            },
+            "description": {
+              "type": "string",
+              "example": "Description of the exercise"
+            }
+          }
+        },
+        "xml": {
+          "name": "WorkoutTemplateExercises"
+        }
+      },
+      "WorkoutTemplateExerciseCreationBody": {
+        "type": "object",
+        "properties": {
+          "template_id": {
+            "type": "string",
+            "example": "1"
+          },
+          "exercise_id": {
+            "type": "string",
+            "example": "3"
+          },
+          "sets": {
+            "type": "number",
+            "example": 3
+          },
+          "reps": {
+            "type": "number",
+            "example": 15
+          },
+          "weight": {
+            "type": "number",
+            "example": 25
+          }
+        },
+        "xml": {
+          "name": "WorkoutTemplateExerciseCreationBody"
         }
       }
     }

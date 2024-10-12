@@ -20,6 +20,12 @@ const doc = {
       name: 'Muscle Groups'
     },
     {
+      name: 'Workout Template'
+    },
+    {
+      name: 'Workout Template Exercises'
+    },
+    {
       name: 'Internal',
       description: 'Restricted endpoints for internal usage only.'
     }
@@ -100,6 +106,79 @@ const doc = {
     },
     LoginResponse: {
       token: 'token'
+    },
+    AllWorkoutTemplates: [
+      {
+        id: '1',
+        user_id: '2',
+        name: 'Workout template name',
+        exercises: [
+          {
+            id: '3',
+            template_id: '1',
+            sets: 3,
+            reps: 10,
+            weight: 15,
+            name: 'Exercise',
+            description: 'Description of the exercise'
+          }
+        ]
+      }
+    ],
+    WorkoutTemplate: {
+      id: '1',
+      user_id: '2',
+      name: 'Workout template name',
+      exercises: [
+        {
+          id: '3',
+          template_id: '1',
+          sets: 3,
+          reps: 10,
+          weight: 15,
+          name: 'Exercise',
+          description: 'Description of the exercise'
+        }
+      ]
+    },
+    CreateWorkoutTemplateBody: {
+      user_id: '2',
+      name: 'Workout template name',
+      exercises: [
+        {
+          exercise_id: '3',
+          sets: 3,
+          reps: 15,
+          weight: 25
+        }
+      ]
+    },
+    WorkoutTemplateExercise: {
+      id: '3',
+      template_id: '1',
+      sets: 3,
+      reps: 10,
+      weight: 15,
+      name: 'Exercise',
+      description: 'Description of the exercise'
+    },
+    WorkoutTemplateExercises: [
+      {
+        id: '3',
+        template_id: '1',
+        sets: 3,
+        reps: 10,
+        weight: 15,
+        name: 'Exercise',
+        description: 'Description of the exercise'
+      }
+    ],
+    WorkoutTemplateExerciseCreationBody: {
+      template_id: '1',
+      exercise_id: '3',
+      sets: 3,
+      reps: 15,
+      weight: 25
     }
   }
 }

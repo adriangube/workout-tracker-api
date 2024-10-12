@@ -1,4 +1,4 @@
-import { MuscleGroup } from '@domain/entities/muscleGroup'
+import { MuscleGroup, MuscleGroupData } from '@domain/entities/muscleGroup'
 import { MuscleGroupRepository } from '@domain/repositories/MuscleGroupRepository'
 import { Database } from '@infrastructure/database/client'
 
@@ -38,7 +38,7 @@ export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
     return response?.rows
   }
 
-  async save(muscleGroup: MuscleGroup): Promise<MuscleGroup> {
+  async save(muscleGroup: MuscleGroupData): Promise<MuscleGroup> {
     const db = await Database.getConnection()
     const query = {
       text: `
@@ -53,9 +53,9 @@ export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
     return response?.rows[0]
   }
 
-  async patch(muscleGroup: MuscleGroup): Promise<MuscleGroup> { 
+  async patch(muscleGroup: MuscleGroupData): Promise<MuscleGroup> { 
     throw new Error('Method not implemented.')
-    return Promise.resolve(muscleGroup)
+    return Promise.resolve(muscleGroup as unknown as MuscleGroup)
   }
 
   async delete(id: string): Promise<void> {

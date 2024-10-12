@@ -1,4 +1,4 @@
-import { Exercise } from '@domain/entities/exercise'
+import { Exercise, ExerciseData } from '@domain/entities/exercise'
 import { ExerciseRepository } from '@domain/repositories/ExerciseRepository'
 import { Database } from '@infrastructure/database/client'
 
@@ -88,7 +88,7 @@ export class ExercisesRepositoryImpl implements ExerciseRepository {
     return response.rows
   }
 
-  async save(exercise: Exercise): Promise<Exercise> {
+  async save(exercise: ExerciseData): Promise<Exercise> {
     const db = await Database.getConnection()
     const query = {
       text: `

@@ -1,4 +1,4 @@
-import { User, UserWithPassword } from '@domain/entities/user'
+import { User, UserData, UserWithPassword } from '@domain/entities/user'
 import { UserRepository } from '@domain/repositories/UserRepository'
 import { Database } from '@infrastructure/database/client'
 
@@ -66,9 +66,9 @@ export class UserRepositoryImpl implements UserRepository {
     await db.end()
     return response?.rows[0]
   }
-  async patch(user: User): Promise<User> {
+  async patch(user: UserData): Promise<User> {
     throw new Error('Method not implemented.')
-    return Promise.resolve(user)
+    return Promise.resolve(user as User)
   }
   async delete(id: string): Promise<void>{
     const db = await Database.getConnection()
