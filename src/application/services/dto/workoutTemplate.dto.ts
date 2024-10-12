@@ -1,5 +1,5 @@
 
-interface CreateWorkoutTemplateExerciseDTO {
+interface ExerciseDTO {
   sets?: number
   reps?: number
   weight?: number
@@ -9,5 +9,5 @@ interface CreateWorkoutTemplateExerciseDTO {
 export interface CreateWorkoutTemplateDTO {
   user_id: string
   name: string
-  exercises?: CreateWorkoutTemplateExerciseDTO[]
+  exercises?: ExerciseDTO[]
 }
