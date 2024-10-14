@@ -1,5 +1,6 @@
 
 export interface UpdateWorkoutExerciseData {
+  id: string
   sets?: number
   reps?: number
   weight?: number

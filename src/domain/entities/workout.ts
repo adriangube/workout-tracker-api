@@ -1,6 +1,7 @@
 import { UpdateWorkoutExerciseData, WorkoutExercise } from './workout_exercise'
 
-export interface CompleteWorkoutData {
+export interface UpdateWorkoutData {
+  workout_id: string
   exercises: UpdateWorkoutExerciseData[]
   end_date?: Date
 }

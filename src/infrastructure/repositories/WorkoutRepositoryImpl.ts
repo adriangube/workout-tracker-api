@@ -1,5 +1,5 @@
-import { Workout, WorkoutStatus } from '@domain/entities/workout'
-import { WorkoutExercise } from '@domain/entities/workout_exercise'
+import { UpdateWorkoutData, Workout, WorkoutStatus } from '@domain/entities/workout'
+import { UpdateWorkoutExerciseData, WorkoutExercise } from '@domain/entities/workout_exercise'
 import { WorkoutRepository } from '@domain/repositories/WorkoutRepository'
 import { Database } from '@infrastructure/database/client'
 
@@ -208,5 +208,77 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
     return exercises
   }
 
-  // TODO continuar con los metodos que faltan
+  private async updateWorkout(workoutId: string, endDate?: Date): Promise<void> {
+    const db = await Database.getConnection()
+    const date = endDate ?? new Date()
+    const query = {
+      text: `
+        UPDATE workout
+        SET end_date = $2
+        WHERE id = $1
+      `,
+      values: [ workoutId, date ]
+    }
+    await db.query(query)
+    await db.end()
+  }
+
+  private async updateWorkoutExercise(data: UpdateWorkoutExerciseData): Promise<void> {
+    const { id, sets, reps, weight, notes } = data
+    const db = await Database.getConnection()
+    const query = {
+      text: `
+        UPDATE workout_exercises
+        SET
+          sets = COALESCE($2, sets),
+          reps = COALESCE($3, reps),
+          weight = COALESCE($4, weight),
+          notes = COALESCE($5, notes)
+        WHERE id = $1
+
+      `,
+      values: [ id, sets, reps, weight, notes ]
+    }
+    await db.query(query)
+    await db.end()
+  }
+
+  async update(data: UpdateWorkoutData): Promise<Workout> {
+    await this.updateWorkout(data.workout_id, data?.end_date)
+    for (const exercise of data.exercises) {
+      await this.updateWorkoutExercise(exercise)
+    }
+    return this.getById(data.workout_id)
+  }
+
+  private async deleteWorkout(workoutId: string): Promise<void>{
+    const db = await Database.getConnection()
+    const query = {
+      text: `
+        DELETE FROM workout
+        WHERE id = $1
+      `,
+      values: [ workoutId ]
+    }
+    await db.query(query)
+    await db.end()
+  }
+
+  private async deleteWorkoutExercises(workoutId: string): Promise<void>{
+    const db = await Database.getConnection()
+    const query = {
+      text: `
+        DELETE FROM workout_exercises
+        WHERE workout_id = $1
+      `,
+      values: [ workoutId ]
+    }
+    await db.query(query)
+    await db.end()
+  }
+
+  async delete(workoutId: string): Promise<void> {
+    await this.deleteWorkoutExercises(workoutId)
+    await this.deleteWorkout(workoutId)
+  }
 }
