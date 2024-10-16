@@ -26,6 +26,12 @@ const doc = {
       name: 'Workout Template Exercises'
     },
     {
+      name: 'Workouts'
+    },
+    {
+      name: 'Workout Exercises'
+    },
+    {
       name: 'Internal',
       description: 'Restricted endpoints for internal usage only.'
     }
@@ -179,6 +185,92 @@ const doc = {
       sets: 3,
       reps: 15,
       weight: 25
+    },
+    Workout: {
+      id: '1',
+      user_id: '2',
+      name: 'Workout Name',
+      status: 'started',
+      start_date: 'Wed Oct 16 2024 20:16:20 GMT+0100',
+      end_date: 'Wed Oct 16 2024 21:16:20 GMT+0100',
+      exercises: [
+        {
+          id: '3',
+          workout_id: '1',
+          name: 'Exercise name',
+          description: 'Exercise description',
+          sets: 3,
+          reps: 10,
+          weight: 25,
+          notes: 'Notes about the exercise'
+        }
+      ]
+    },
+    AllWorkouts: [
+      {
+        id: '1',
+        user_id: '2',
+        name: 'Workout Name',
+        status: 'started',
+        start_date: 'Wed Oct 16 2024 20:16:20 GMT+0100',
+        end_date: 'Wed Oct 16 2024 21:16:20 GMT+0100',
+        exercises: [
+          {
+            id: '3',
+            workout_id: '1',
+            name: 'Exercise name',
+            description: 'Exercise description',
+            sets: 3,
+            reps: 10,
+            weight: 25,
+            notes: 'Notes about the exercise'
+          }
+        ]
+      }
+    ],
+    StartWorkoutBody: {
+      templateId: '2'
+    },
+    UpdateWorkoutBody: {
+      exercises: [
+        {
+          id: '3',
+          sets: 3,
+          reps: 10,
+          weight: 25,
+          notes: 'Notes about the exercise'
+        }
+      ],
+      end_date: 'Wed Oct 16 2024 21:16:20 GMT+0100'
+    },
+    WorkoutExercise: {
+      id: '3',
+      workout_id: '1',
+      name: 'Exercise name',
+      description: 'Exercise description',
+      sets: 3,
+      reps: 10,
+      weight: 25,
+      notes: 'Notes about the exercise'
+    },
+    WorkoutExercises: [
+      {
+        id: '3',
+        workout_id: '1',
+        name: 'Exercise name',
+        description: 'Exercise description',
+        sets: 3,
+        reps: 10,
+        weight: 25,
+        notes: 'Notes about the exercise'
+      }
+    ],
+    UpdateWorkoutExercise: {
+      id: '3',
+      sets: 3,
+      reps: 10,
+      weight: 25,
+      notes: 'Notes about the exercise'
     }
   }
 }
