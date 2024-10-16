@@ -171,7 +171,7 @@ usersRouter.delete('/:id/workout-templates/:templateId/exercises/:templateExerci
 usersRouter.get('/:id/workouts', (req: Request, res: Response, next: NextFunction) => {
   /*  
   #swagger.tags = ['Workouts']
-  #swagger.responses[200] = { schema:{ $ref: "#/definitions/AllWorkoutTemplates" } }
+  #swagger.responses[200] = { schema:{ $ref: "#/definitions/AllWorkouts" } }
   #swagger.security = [{"bearerAuth": []}]
 */
   workoutController.getAllWorkoutsByUserId(req, res, next)
@@ -180,7 +180,7 @@ usersRouter.get('/:id/workouts', (req: Request, res: Response, next: NextFunctio
 usersRouter.get('/:id/workouts/:workoutId', (req: Request, res: Response, next: NextFunction) => {
   /*  
   #swagger.tags = ['Workouts']
-  #swagger.responses[200] = { schema:{ $ref: "#/definitions/AllWorkoutTemplates" } }
+  #swagger.responses[200] = { schema:{ $ref: "#/definitions/Workout" } }
   #swagger.security = [{"bearerAuth": []}]
 */
   workoutController.getWorkoutById(req, res, next)
@@ -189,7 +189,8 @@ usersRouter.get('/:id/workouts/:workoutId', (req: Request, res: Response, next: 
 usersRouter.post('/:id/workouts', (req: Request, res: Response, next: NextFunction) => {
   /*  
   #swagger.tags = ['Workouts']
-  #swagger.responses[200] = { schema:{ $ref: "#/definitions/AllWorkoutTemplates" } }
+  #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/StartWorkoutBody" } }
+  #swagger.responses[200] = { schema:{ $ref: "#/definitions/Workout" } }
   #swagger.security = [{"bearerAuth": []}]
 */
   workoutController.startWorkout(req, res, next)
@@ -198,13 +199,14 @@ usersRouter.post('/:id/workouts', (req: Request, res: Response, next: NextFuncti
 usersRouter.patch('/:id/workouts/:workoutId', (req: Request, res: Response, next: NextFunction) => {
   /*  
   #swagger.tags = ['Workouts']
-  #swagger.responses[200] = { schema:{ $ref: "#/definitions/AllWorkoutTemplates" } }
+  #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/UpdateWorkoutBody" } }
+  #swagger.responses[200] = { schema:{ $ref: "#/definitions/Workout" } }
   #swagger.security = [{"bearerAuth": []}]
 */
   workoutController.updateWorkout(req, res, next)
 })
 
-usersRouter.delete('/:id/workouts', (req: Request, res: Response, next: NextFunction) => {
+usersRouter.delete('/:id/workouts/:workoutId', (req: Request, res: Response, next: NextFunction) => {
   /*  
   #swagger.tags = ['Workouts']
   #swagger.responses[200] = { }

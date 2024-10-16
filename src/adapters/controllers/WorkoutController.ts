@@ -59,7 +59,7 @@ export class WorkoutController {
         throw new NotFoundError('Workout not found')
       }
       const body = req.body
-      const validatorResult1 = await uuidValidator(body.userId)
+      const validatorResult1 = await uuidValidator(params.id)
       const validatorResult2 = await uuidValidator(body.templateId)
       if (validatorResult1.error) {
         throw new BadRequestError(validatorResult1?.error?.message)
