@@ -29,6 +29,9 @@ const doc = {
       name: 'Workouts'
     },
     {
+      name: 'Workout Exercises'
+    },
+    {
       name: 'Internal',
       description: 'Restricted endpoints for internal usage only.'
     }
@@ -239,6 +242,35 @@ const doc = {
         }
       ],
       end_date: 'Wed Oct 16 2024 21:16:20 GMT+0100'
+    },
+    WorkoutExercise: {
+      id: '3',
+      workout_id: '1',
+      name: 'Exercise name',
+      description: 'Exercise description',
+      sets: 3,
+      reps: 10,
+      weight: 25,
+      notes: 'Notes about the exercise'
+    },
+    WorkoutExercises: [
+      {
+        id: '3',
+        workout_id: '1',
+        name: 'Exercise name',
+        description: 'Exercise description',
+        sets: 3,
+        reps: 10,
+        weight: 25,
+        notes: 'Notes about the exercise'
+      }
+    ],
+    UpdateWorkoutExercise: {
+      id: '3',
+      sets: 3,
+      reps: 10,
+      weight: 25,
+      notes: 'Notes about the exercise'
     }
   }
 }

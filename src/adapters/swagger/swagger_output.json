@@ -34,6 +34,9 @@
       "name": "Workouts"
     },
     {
+      "name": "Workout Exercises"
+    },
+    {
       "name": "Internal",
       "description": "Restricted endpoints for internal usage only."
     }
@@ -842,6 +845,179 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/users/{id}/workouts/{workoutId}/exercises/{exerciseId}": {
+      "get": {
+        "tags": [
+          "Workout Exercises"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workoutId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutExercise"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutExercise"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Workout Exercises"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workoutId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutExercise"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutExercise"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkoutExercise"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkoutExercise"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}/workouts/{workoutId}/exercises": {
+      "get": {
+        "tags": [
+          "Workout Exercises"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workoutId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutExercises"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutExercises"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1898,6 +2074,117 @@
         },
         "xml": {
           "name": "UpdateWorkoutBody"
+        }
+      },
+      "WorkoutExercise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "3"
+          },
+          "workout_id": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Exercise name"
+          },
+          "description": {
+            "type": "string",
+            "example": "Exercise description"
+          },
+          "sets": {
+            "type": "number",
+            "example": 3
+          },
+          "reps": {
+            "type": "number",
+            "example": 10
+          },
+          "weight": {
+            "type": "number",
+            "example": 25
+          },
+          "notes": {
+            "type": "string",
+            "example": "Notes about the exercise"
+          }
+        },
+        "xml": {
+          "name": "WorkoutExercise"
+        }
+      },
+      "WorkoutExercises": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "3"
+            },
+            "workout_id": {
+              "type": "string",
+              "example": "1"
+            },
+            "name": {
+              "type": "string",
+              "example": "Exercise name"
+            },
+            "description": {
+              "type": "string",
+              "example": "Exercise description"
+            },
+            "sets": {
+              "type": "number",
+              "example": 3
+            },
+            "reps": {
+              "type": "number",
+              "example": 10
+            },
+            "weight": {
+              "type": "number",
+              "example": 25
+            },
+            "notes": {
+              "type": "string",
+              "example": "Notes about the exercise"
+            }
+          }
+        },
+        "xml": {
+          "name": "WorkoutExercises"
+        }
+      },
+      "UpdateWorkoutExercise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "3"
+          },
+          "sets": {
+            "type": "number",
+            "example": 3
+          },
+          "reps": {
+            "type": "number",
+            "example": 10
+          },
+          "weight": {
+            "type": "number",
+            "example": 25
+          },
+          "notes": {
+            "type": "string",
+            "example": "Notes about the exercise"
+          }
+        },
+        "xml": {
+          "name": "UpdateWorkoutExercise"
         }
       }
     }
