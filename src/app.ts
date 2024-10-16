@@ -1,11 +1,11 @@
-import '@config/env'
+import '@/app/config/env'
 import express, { json, Express } from 'express'
 import morgan from 'morgan'
 import swaggerUi from 'swagger-ui-express'
-import { router } from '@adapters/routes'
-import swaggerOutput from '@adapters/swagger/swagger_output.json'
-import { config } from '@config/index'
-import { errorMiddleware } from '@adapters/middlewares/errorMiddleware'
+import { router } from '@/app/infrastructure/routes'
+import swaggerOutput from '@/app/infrastructure/swagger/swagger_output.json'
+import { config } from '@/app/config/index'
+import { errorMiddleware } from '@/app/infrastructure/middlewares/errorMiddleware'
 
 const app: Express = express()
 
