@@ -10,5 +10,6 @@ export const config = {
   ADMIN_USERNAME: process.env.ADMIN_USERNAME,
   ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
   ADMIN_EMAIL: process.env.ADMIN_EMAIL,
-  DB_URL: process.env.DB_URL
+  DB_URL: process.env.DB_URL,
+  HOST: process.env.HOST
 }
