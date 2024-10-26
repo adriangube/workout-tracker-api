@@ -1,14 +1,17 @@
 import { MuscleGroup, MuscleGroupData } from '@/muscleGroup/domain/muscleGroup'
 import { MuscleGroupRepository } from '@/muscleGroup/domain/MuscleGroupRepository'
 import { Database } from '@/app/infrastructure/database/client'
+import { loadSQL } from '@/app/infrastructure/database/loadSQL'
 
 export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
+
+  sqlFolderPath = 'src/muscleGroup/infrastructure/sql'
 
   async getByName(name: string): Promise<MuscleGroup | null>{
     const db = await Database.getConnection()
 
     const query = {
-      text: 'SELECT id, name FROM muscle_groups WHERE name = $1',
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getByName.sql' }),
       values: [ name ]
     }
     const response = await db.query<MuscleGroup>(query)
@@ -20,7 +23,7 @@ export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
     const db = await Database.getConnection()
 
     const query = {
-      text: 'SELECT id, name FROM muscle_groups WHERE id = $1',
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getById.sql' }),
       values: [ id ]
     }
     const response = await db.query<MuscleGroup>(query)
@@ -31,7 +34,7 @@ export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
   async getAll(): Promise<MuscleGroup[]> {
     const db = await Database.getConnection()
     const query = {
-      text: 'SELECT id, name FROM muscle_groups'
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getAll.sql' }),
     }
     const response = await db.query<MuscleGroup>(query)
     await db.end()
@@ -41,11 +44,7 @@ export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
   async save(muscleGroup: MuscleGroupData): Promise<MuscleGroup> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-              INSERT INTO muscle_groups(name)
-              VALUES($1)
-              RETURNING id, name
-          `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'save.sql' }),
       values: [ muscleGroup.name ]
     }
     const response = await db.query<MuscleGroup>(query)
@@ -61,10 +60,7 @@ export class MuscleGroupRepositoryImpl implements MuscleGroupRepository {
   async delete(id: string): Promise<void> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-              DELETE FROM muscle_groups
-              WHERE id = $1
-          `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'delete.sql' }),
       values: [ id ]
     }
     await db.query(query)

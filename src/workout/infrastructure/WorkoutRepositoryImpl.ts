@@ -2,39 +2,16 @@ import { UpdateWorkoutData, Workout, WorkoutStatus } from '@/workout/domain/work
 import { UpdateWorkoutExerciseData, WorkoutExercise } from '@/workoutExercise/domain/workoutExercise'
 import { WorkoutRepository } from '@/workout/domain/WorkoutRepository'
 import { Database } from '@/app/infrastructure/database/client'
+import { loadSQL } from '@/app/infrastructure/database/loadSQL'
 
 export class WorkoutRepositoryImpl implements WorkoutRepository{
+
+  sqlFolderPath = 'src/muscleGroup/infrastructure/sql'
 
   async getById(id: string): Promise<Workout> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-        SELECT
-          w.id,
-          w.user_id,
-          w.status,
-          w.start_date,
-          w.end_date,
-          wt.name,
-          json_agg(
-              json_build_object(
-                'id', we.id,
-                'workout_id', we.workout_id,
-                'sets', we.sets,
-                'reps', we.reps,
-                'weight', we.weight,
-                'notes', we.notes,
-                'name', e.name,
-                'description', e.description
-              )
-            ) FILTER (WHERE we.id IS NOT NULL) AS exercises
-          FROM workouts w
-          LEFT JOIN workout_exercises we ON we.workout_id = w.id
-          LEFT JOIN workout_template_exercises wte ON we.template_exercise_id = wte.id
-          LEFT JOIN exercises e ON wte.exercise_id = e.id
-          WHERE w.id = $1
-          GROUP BY w.id, w.user_id, w.status, w.start_date, w.end_date, wt.name
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getById.sql' }),
       values: [ id ]
     }
     const response = await db.query<Workout>(query)
@@ -45,34 +22,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
   async getAllByUserId(userId: string): Promise<Workout[]> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-        SELECT
-          w.id,
-          w.user_id,
-          w.status,
-          w.start_date,
-          w.end_date,
-          wt.name,
-          json_agg(
-              json_build_object(
-                'id', we.id,
-                'workout_id', we.workout_id,
-                'sets', we.sets,
-                'reps', we.reps,
-                'weight', we.weight,
-                'notes', we.notes,
-                'name', e.name,
-                'description', e.description
-              )
-            ) FILTER (WHERE we.id IS NOT NULL) AS exercises
-          FROM workouts w
-          LEFT JOIN workout_exercises we ON we.workout_id = w.id
-          LEFT JOIN workout_template_exercises wte ON we.template_exercise_id = wte.id
-          LEFT JOIN exercises e ON wte.exercise_id = e.id
-          LEFT JOIN workout_templates wt ON w.template_id = wt.id
-          WHERE w.user_id = $1
-          GROUP BY w.id, w.user_id, w.status, w.start_date, w.end_date, wt.name
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getAllByUserId.sql' }),
       values: [ userId ]
     }
     const response = await db.query<Workout[]>(query)
@@ -83,21 +33,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
   async start(userId: string, templateId: string): Promise<Workout> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-        WITH workout as (
-          INSERT INTO workouts(user_id, template_id, status)
-          VALUES($1, $2, $3)
-          RETURNING id, user_id, template_id, status, start_date
-        ) SELECT
-            w.id,
-            w.user_id,
-            w.template_id,
-            w.status,
-            w.start_date,
-            wt.name
-          FROM workout w
-          LEFT JOIN workout_templates wt ON w.template_id = wt.id
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'start.sql' }),
       values: [ userId, templateId, 'started' ]
     }
     const response = await db.query<{
@@ -135,18 +71,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
   }[]>{
     const db = await Database.getConnection()
     const query = {
-      text: `
-        SELECT
-          wte.id as template_exercise_id,
-          wte.sets,
-          wte.reps,
-          wte.weight,
-          e.name,
-          e.description
-        FROM workout_template_exercises wte
-        LEFT JOIN exercises e ON wte.exercise_id = e.id
-        WHERE wte.template_id = $1
-      `,  
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getTemplateExercisesByTemplateId.sql' }), 
       values: [ templateId ]
     }
 
@@ -212,11 +137,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
     const db = await Database.getConnection()
     const date = endDate ?? new Date()
     const query = {
-      text: `
-        UPDATE workout
-        SET end_date = $2
-        WHERE id = $1
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'updateWorkout.sql' }), 
       values: [ workoutId, date ]
     }
     await db.query(query)
@@ -227,16 +148,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
     const { id, sets, reps, weight, notes } = data
     const db = await Database.getConnection()
     const query = {
-      text: `
-        UPDATE workout_exercises
-        SET
-          sets = COALESCE($2, sets),
-          reps = COALESCE($3, reps),
-          weight = COALESCE($4, weight),
-          notes = COALESCE($5, notes)
-        WHERE id = $1
-
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'updateWorkoutExercise.sql' }),
       values: [ id, sets, reps, weight, notes ]
     }
     await db.query(query)
@@ -254,10 +166,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
   private async deleteWorkout(workoutId: string): Promise<void>{
     const db = await Database.getConnection()
     const query = {
-      text: `
-        DELETE FROM workout
-        WHERE id = $1
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'deleteWorkout.sql' }),
       values: [ workoutId ]
     }
     await db.query(query)
@@ -267,10 +176,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
   private async deleteWorkoutExercises(workoutId: string): Promise<void>{
     const db = await Database.getConnection()
     const query = {
-      text: `
-        DELETE FROM workout_exercises
-        WHERE workout_id = $1
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'deleteWorkoutExercise.sql' }),
       values: [ workoutId ]
     }
     await db.query(query)

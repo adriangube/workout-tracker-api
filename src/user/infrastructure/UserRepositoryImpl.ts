@@ -3,8 +3,11 @@ import { UserRepository } from '@/user/domain/UserRepository'
 import { Database } from '@/app/infrastructure/database/client'
 import { config } from '@/app/config'
 import { hashPassword } from '@/auth/utils/password'
+import { loadSQL } from '@/app/infrastructure/database/loadSQL'
 
 export class UserRepositoryImpl implements UserRepository {
+
+  sqlFolderPath = 'src/user/infrastructure/sql'
 
   async getByName(userName: string, withPassword: boolean = false): Promise<User | UserWithPassword | null> {
     const db = await Database.getConnection()
@@ -12,20 +15,12 @@ export class UserRepositoryImpl implements UserRepository {
 
     if (withPassword) {
       query = {
-        text: `
-          SELECT id, username, email, password
-          FROM users
-          WHERE username = $1
-        `,
+        text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getByNameWithPassword.sql' }),
         values: [ userName ]
       }
     } else {
       query = {
-        text: `
-          SELECT id, username, email
-          FROM users
-          WHERE username = $1
-        `,
+        text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getByName.sql' }),
         values: [ userName ]
       }
     }
@@ -38,7 +33,7 @@ export class UserRepositoryImpl implements UserRepository {
   async getById (id: string): Promise<User | null> {
     const db = await Database.getConnection()
     const query = {
-      text: 'SELECT id, username, email FROM users WHERE id = $1',
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getById.sql' }),
       values: [ id ]
     }
     const response = await db.query<User>(query)
@@ -48,7 +43,7 @@ export class UserRepositoryImpl implements UserRepository {
   async getAll(): Promise<User[]> {
     const db = await Database.getConnection()
     const query = {
-      text: 'SELECT id, username, email FROM users',
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getAll.sql' }),
     }
     const response = await db.query<User>(query)
     await db.end()
@@ -57,11 +52,7 @@ export class UserRepositoryImpl implements UserRepository {
   async save(user: UserWithPassword): Promise<User> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-                INSERT INTO users(username, email, password)
-                VALUES($1, $2, $3)
-                RETURNING id, username, email
-            `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'save.sql' }),
       values: [ user.username, user.email, user.password ]
     }
     const response = await db.query<User>(query)
@@ -75,10 +66,7 @@ export class UserRepositoryImpl implements UserRepository {
   async delete(id: string): Promise<void>{
     const db = await Database.getConnection()
     const query = {
-      text: `
-                DELETE FROM users
-                WHERE id = $1
-            `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'delete.sql' }),
       values: [ id ]
     }
     await db.query(query)
@@ -88,11 +76,7 @@ export class UserRepositoryImpl implements UserRepository {
     const db = await Database.getConnection()
     const password = await hashPassword(config.ADMIN_PASSWORD as string)
     const query = {
-      text: `
-          INSERT INTO users (username, email, password)
-          VALUES ($1, $2, $3)
-          ON CONFLICT (username) DO NOTHING;
-        `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'createUserWithoutConflict.sql' }),
       values: [ config.ADMIN_USERNAME, config.ADMIN_EMAIL, password ]
     }
     await db.query(query)

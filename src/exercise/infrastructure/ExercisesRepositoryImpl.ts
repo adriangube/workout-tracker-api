@@ -1,30 +1,15 @@
 import { Exercise, ExerciseData } from '@/exercise/domain/exercise'
 import { ExerciseRepository } from 'src/exercise/domain/ExerciseRepository'
 import { Database } from '@/app/infrastructure/database/client'
+import { loadSQL } from '@/app/infrastructure/database/loadSQL'
 
 export class ExercisesRepositoryImpl implements ExerciseRepository {
+  sqlFolderPath = 'src/exercise/infrastructure/sql'
+
   async getByName(name: string): Promise<Exercise | null>{
     const db = await Database.getConnection()
     const query = {
-      text: `
-        SELECT e.id,
-        e.name,
-        e.description,
-        CASE
-          WHEN COUNT(mg.id) = 0 THEN NULL
-          ELSE json_agg(
-            json_build_object(
-              'id', mg.id,
-              'name', mg.name
-            )
-          )
-          END as muscle_groups
-        FROM exercises e
-        LEFT JOIN exercise_muscle_groups emg ON e.id = emg.exercise_id
-        LEFT JOIN muscle_groups mg ON mg.id = emg.muscle_group_id
-        WHERE e.name = $1
-        GROUP BY e.id
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getByName.sql' }),
       values: [ name ]
     }
     const response = await db.query<Exercise>(query)
@@ -35,25 +20,7 @@ export class ExercisesRepositoryImpl implements ExerciseRepository {
   async getById(id: string): Promise<Exercise | null> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-        SELECT e.id,
-        e.name,
-        e.description,
-        CASE
-          WHEN COUNT(mg.id) = 0 THEN NULL
-          ELSE json_agg(
-            json_build_object(
-              'id', mg.id,
-              'name', mg.name
-            )
-          )
-          END as muscle_groups
-        FROM exercises e
-        LEFT JOIN exercise_muscle_groups emg ON e.id = emg.exercise_id
-        LEFT JOIN muscle_groups mg ON mg.id = emg.muscle_group_id
-        WHERE e.id = $1
-        GROUP BY e.id
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getById.sql' }),
       values: [ id ]
     }
     const response = await db.query<Exercise>(query)
@@ -64,24 +31,7 @@ export class ExercisesRepositoryImpl implements ExerciseRepository {
   async getAll(): Promise<Exercise[]>{
     const db = await Database.getConnection()
     const query = {
-      text: `
-        SELECT e.id,
-        e.name,
-        e.description,
-        CASE
-          WHEN COUNT(mg.id) = 0 THEN NULL
-          ELSE json_agg(
-            json_build_object(
-              'id', mg.id,
-              'name', mg.name
-            )
-          )
-        END as muscle_groups
-        FROM exercises e
-        LEFT JOIN exercise_muscle_groups emg ON e.id = emg.exercise_id
-        LEFT JOIN muscle_groups mg ON mg.id = emg.muscle_group_id
-        GROUP BY e.id
-      `
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getAll.sql' }),
     }
     const response = await db.query<Exercise>(query)
     await db.end()
@@ -91,11 +41,7 @@ export class ExercisesRepositoryImpl implements ExerciseRepository {
   async save(exercise: ExerciseData): Promise<Exercise> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-        INSERT INTO exercises(name, description)
-        VALUES($1, $2)
-        RETURNING id, name, description
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'save.sql' }),
       values: [ exercise.name, exercise.description ]
     }
     const response = await db.query<Exercise>(query)
@@ -106,10 +52,7 @@ export class ExercisesRepositoryImpl implements ExerciseRepository {
   async addMuscleGroup({ exerciseId, muscleGroupId }: { exerciseId: string; muscleGroupId: string }): Promise<void> {
     const db = await Database.getConnection()
     const query = {
-      text: `
-        INSERT INTO exercise_muscle_groups(exercise_id, muscle_group_id)
-        VALUES($1, $2)
-      `,
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'addMuscleGroup.sql' }),
       values: [ exerciseId, muscleGroupId ]
     }
     await db.query(query)
