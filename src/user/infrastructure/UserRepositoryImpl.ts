@@ -86,15 +86,13 @@ export class UserRepositoryImpl implements UserRepository {
   }
   async createAdminUserIfNotExists(): Promise<void>{
     const db = await Database.getConnection()
-    const password = hashPassword(config.ADMIN_PASSWORD as string)
+    const password = await hashPassword(config.ADMIN_PASSWORD as string)
     const query = {
       text: `
-        INSERT INTO users (username, email, password)
-        SELECT $1, $2, $3
-        WHERE NOT EXISTS (
-            SELECT 1 FROM users WHERE username = $1
-        );
-      `,
+          INSERT INTO users (username, email, password)
+          VALUES ($1, $2, $3)
+          ON CONFLICT (username) DO NOTHING;
+        `,
       values: [ config.ADMIN_USERNAME, config.ADMIN_EMAIL, password ]
     }
     await db.query(query)

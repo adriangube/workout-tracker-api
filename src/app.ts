@@ -6,6 +6,7 @@ import { router } from '@/app/infrastructure/routes'
 import swaggerOutput from '@/app/infrastructure/swagger/swagger_output.json'
 import { config } from '@/app/config/index'
 import { errorMiddleware } from '@/app/infrastructure/middlewares/errorMiddleware'
+import { initializeAdminUser } from '@/muscleGroup/application/initializeAdminUser'
 
 const app: Express = express()
 
@@ -24,5 +25,6 @@ app.use((req, res) => {
 })
 const port = config.PORT
 app.listen(port, () => {
-  console.info(`App listening on port ${port}`)
+  console.info(`App listening on port ${ port }`)
 })
+initializeAdminUser()
