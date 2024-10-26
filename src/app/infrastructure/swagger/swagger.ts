@@ -40,7 +40,7 @@ const doc = {
   servers: [
   
     process.env.NODE_ENV === 'production' ? {
-      url: `https://${config.HOST}:${config.PORT}`,
+      url: `https://${config.HOST}`,
       description: 'Production Environment'
     } : {
       url: `http://${config.HOST}:${config.PORT}`,
