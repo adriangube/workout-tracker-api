@@ -42,7 +42,7 @@ export class WorkoutController {
       }
 
       const workouts = await this.workoutService.getAllWorkoutsByUserId(validatorResult.data)
-      if (workouts.length > 0) {
+      if (workouts?.length > 0) {
         return res.status(200).send(workouts)
       }
       throw new NotFoundError('Workouts not found')
