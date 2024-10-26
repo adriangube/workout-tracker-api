@@ -6,7 +6,7 @@ import { loadSQL } from '@/app/infrastructure/database/loadSQL'
 
 export class WorkoutRepositoryImpl implements WorkoutRepository{
 
-  sqlFolderPath = 'src/muscleGroup/infrastructure/sql'
+  sqlFolderPath = 'src/workout/infrastructure/sql'
 
   async getById(id: string): Promise<Workout> {
     const db = await Database.getConnection()
