@@ -71,7 +71,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
   }[]>{
     const db = await Database.getConnection()
     const query = {
-      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getTemplateExercisesByTemplateId.sql' }), 
+      text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getTemplateExerciseByTemplateId.sql' }), 
       values: [ templateId ]
     }
 
