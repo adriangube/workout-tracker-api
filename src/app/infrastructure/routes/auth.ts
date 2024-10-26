@@ -16,6 +16,7 @@ authRouter.post('/token', (req: Request, res: Response, next: NextFunction) => {
   #swagger.tags = ['Auth']
   #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/LoginBody" } }
   #swagger.responses[200] = { schema:{ $ref: "#/definitions/LoginResponse" } } 
+  #swagger.description = Get an authentication token
 */
   authController.token(req, res, next)
 })

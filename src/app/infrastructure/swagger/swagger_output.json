@@ -47,7 +47,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Get user by id",
         "parameters": [
           {
             "name": "id",
@@ -85,7 +85,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Partially update a user",
         "parameters": [
           {
             "name": "id",
@@ -138,7 +138,7 @@
         "tags": [
           "Internal"
         ],
-        "description": "",
+        "description": "Delete a user",
         "parameters": [
           {
             "name": "id",
@@ -166,7 +166,7 @@
         "tags": [
           "Internal"
         ],
-        "description": "",
+        "description": "Get all users",
         "responses": {
           "200": {
             "description": "OK",
@@ -196,7 +196,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Create a user",
         "responses": {
           "200": {
             "description": "OK",
@@ -241,7 +241,7 @@
         "tags": [
           "Workout Template"
         ],
-        "description": "",
+        "description": "Get all workout templates from a user",
         "parameters": [
           {
             "name": "id",
@@ -279,7 +279,7 @@
         "tags": [
           "Workout Template"
         ],
-        "description": "",
+        "description": "Create a workout template",
         "parameters": [
           {
             "name": "id",
@@ -334,7 +334,7 @@
         "tags": [
           "Workout Template"
         ],
-        "description": "",
+        "description": "Get a workout template",
         "parameters": [
           {
             "name": "id",
@@ -380,7 +380,7 @@
         "tags": [
           "Workout Template"
         ],
-        "description": "",
+        "description": "Delete a workout template",
         "parameters": [
           {
             "name": "id",
@@ -416,7 +416,7 @@
         "tags": [
           "Workout Template Exercises"
         ],
-        "description": "",
+        "description": "Get the exercises from a workout template",
         "parameters": [
           {
             "name": "id",
@@ -462,7 +462,7 @@
         "tags": [
           "Workout Template Exercises"
         ],
-        "description": "",
+        "description": "Add a exercise into a workout template",
         "parameters": [
           {
             "name": "id",
@@ -525,7 +525,7 @@
         "tags": [
           "Workout Template Exercises"
         ],
-        "description": "",
+        "description": "Get a exercise from a workout template",
         "parameters": [
           {
             "name": "id",
@@ -579,7 +579,7 @@
         "tags": [
           "Workout Template Exercises"
         ],
-        "description": "",
+        "description": "Delete a exercise from a workout template",
         "parameters": [
           {
             "name": "id",
@@ -623,7 +623,7 @@
         "tags": [
           "Workouts"
         ],
-        "description": "",
+        "description": "Get all workouts from a user",
         "parameters": [
           {
             "name": "id",
@@ -661,7 +661,7 @@
         "tags": [
           "Workouts"
         ],
-        "description": "",
+        "description": "Start a workout",
         "parameters": [
           {
             "name": "id",
@@ -716,7 +716,7 @@
         "tags": [
           "Workouts"
         ],
-        "description": "",
+        "description": "Get a workout",
         "parameters": [
           {
             "name": "id",
@@ -762,7 +762,7 @@
         "tags": [
           "Workouts"
         ],
-        "description": "",
+        "description": "Update a workout. Can be used to finish a workout.",
         "parameters": [
           {
             "name": "id",
@@ -823,7 +823,7 @@
         "tags": [
           "Workouts"
         ],
-        "description": "",
+        "description": "Delete a workout",
         "parameters": [
           {
             "name": "id",
@@ -859,7 +859,7 @@
         "tags": [
           "Workout Exercises"
         ],
-        "description": "",
+        "description": "Get a exercise from a workout",
         "parameters": [
           {
             "name": "id",
@@ -913,7 +913,7 @@
         "tags": [
           "Workout Exercises"
         ],
-        "description": "",
+        "description": "Partially update an exercise from a workout",
         "parameters": [
           {
             "name": "id",
@@ -984,7 +984,7 @@
         "tags": [
           "Workout Exercises"
         ],
-        "description": "",
+        "description": "Get all exercises from a workout",
         "parameters": [
           {
             "name": "id",
@@ -1032,7 +1032,7 @@
         "tags": [
           "Muscle Groups"
         ],
-        "description": "",
+        "description": "Get a muscle group",
         "parameters": [
           {
             "name": "id",
@@ -1070,7 +1070,7 @@
         "tags": [
           "Internal"
         ],
-        "description": "",
+        "description": "Partially update a muscle group",
         "parameters": [
           {
             "name": "id",
@@ -1123,7 +1123,7 @@
         "tags": [
           "Internal"
         ],
-        "description": "",
+        "description": "Delete a muscle group",
         "parameters": [
           {
             "name": "id",
@@ -1151,7 +1151,7 @@
         "tags": [
           "Muscle Groups"
         ],
-        "description": "",
+        "description": "Get all muscle groups",
         "responses": {
           "200": {
             "description": "OK",
@@ -1179,7 +1179,7 @@
         "tags": [
           "Internal"
         ],
-        "description": "",
+        "description": "Create a muscle group",
         "responses": {
           "200": {
             "description": "OK",
@@ -1224,7 +1224,7 @@
         "tags": [
           "Exercises"
         ],
-        "description": "",
+        "description": "Get a exercise",
         "parameters": [
           {
             "name": "id",
@@ -1264,7 +1264,7 @@
         "tags": [
           "Exercises"
         ],
-        "description": "",
+        "description": "Get all exercises",
         "responses": {
           "200": {
             "description": "OK",
@@ -1292,7 +1292,7 @@
         "tags": [
           "Internal"
         ],
-        "description": "",
+        "description": "Create an exercise",
         "responses": {
           "200": {
             "description": "OK",
@@ -1337,7 +1337,7 @@
         "tags": [
           "Auth"
         ],
-        "description": "",
+        "description": "Get an authentication token",
         "responses": {
           "200": {
             "description": "OK",
