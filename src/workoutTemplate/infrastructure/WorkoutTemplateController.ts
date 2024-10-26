@@ -39,7 +39,7 @@ export class WorkoutTemplateController {
         throw new BadRequestError(validatorResult?.error?.message)
       }
       const workoutTemplates = await this.workoutTemplateService.getWorkoutAllTemplatesByUserId(validatorResult.data)
-      if (workoutTemplates.length > 0) {
+      if (workoutTemplates?.length > 0) {
         return res.status(200).send(workoutTemplates)
       }
       throw new NotFoundError('Workout templates not found')
@@ -61,7 +61,7 @@ export class WorkoutTemplateController {
       const usersTemplates = await this.workoutTemplateService.
         getWorkoutAllTemplatesByUserId(validatorResult.data.user_id)
       const withSameName = usersTemplates.filter((template) => template.name === validatorResult.data.name)
-      if (withSameName.length > 0) {
+      if (withSameName?.length > 0) {
         throw new ConflictError('Conflict: A workout template already exist with the same name')
       }
 

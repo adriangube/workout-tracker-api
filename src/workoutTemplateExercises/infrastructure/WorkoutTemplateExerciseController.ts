@@ -27,7 +27,7 @@ export class WorkoutTemplateExerciseController {
       const workoutTemplateExercises = await this.workoutTemplateExerciseService.
         getAllWorkoutTemplateExerciseByWorkoutTemplateId(validatorResult.data)
       
-      if (workoutTemplateExercises.length > 0) {
+      if (workoutTemplateExercises?.length > 0) {
         return res.status(200).send(workoutTemplateExercises)
       }
       throw new NotFoundError('Workout template exercises not found')
