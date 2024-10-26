@@ -1,5 +1,6 @@
 import swaggerAutogen from 'swagger-autogen'
-
+import '@/app/config/env'
+import { config } from '@/app/config'
 const doc = {
   info: {
     version: 'v1.0.0',
@@ -37,10 +38,14 @@ const doc = {
     }
   ],
   servers: [
-    {
-      url: 'http://localhost:3000',
-      description: ''
-    },
+  
+    process.env.NODE_ENV === 'production' ? {
+      url: `https://${config.HOST}:${config.PORT}`,
+      description: 'Production Environment'
+    } : {
+      url: `http://${config.HOST}:${config.PORT}`,
+      description: 'Dev Environment'
+    }
   ],
   components: {
     securitySchemes: {
