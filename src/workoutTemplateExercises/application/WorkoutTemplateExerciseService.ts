@@ -12,7 +12,7 @@ export class WorkoutTemplateExerciseService {
   async getAllWorkoutTemplateExerciseByWorkoutTemplateId(
     workoutTemplateId: string
   ): Promise<WorkoutTemplateExercise[]> {
-    return await this.workoutTemplateExerciseRepository.getByAllWorkoutTemplateId(workoutTemplateId)
+    return await this.workoutTemplateExerciseRepository.getAllByWorkoutTemplateId(workoutTemplateId)
   }
 
   async getWorkoutTemplateExerciseById(workoutTemplateExerciseId: string): Promise<WorkoutTemplateExercise> {
