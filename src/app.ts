@@ -7,13 +7,16 @@ import swaggerOutput from '@/app/infrastructure/swagger/swagger_output.json'
 import { config } from '@/app/config/index'
 import { errorMiddleware } from '@/app/infrastructure/middlewares/errorMiddleware'
 import { initializeAdminUser } from '@/muscleGroup/application/initializeAdminUser'
+import helmet from 'helmet'
 
 const app: Express = express()
 
 app.use(json())
 app.use(morgan('tiny'))
 app.disable('x-powered-by')
-
+app.use(helmet({
+  crossOriginEmbedderPolicy: false
+}))
 
 app.use('/', router)
 
