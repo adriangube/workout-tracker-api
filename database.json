@@ -3,9 +3,9 @@
         "driver": "pg",
         "user": {"ENV": "POSTGRES_USER"},
         "password": {"ENV": "POSTGRES_PASSWORD"},
-        "host": "localhost",
+        "host": {"ENV": "DB_HOST"},
         "database":{"ENV": "POSTGRES_DB"},
-        "port": "5432",
+        "port": {"ENV": "DB_PORT"},
         "schema": "my_schema"
     },
     "sql-file": true
