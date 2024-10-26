@@ -1,6 +1,9 @@
-import { WorkoutTemplate, WorkoutTemplateData } from '@domain/entities/workoutTemplate'
-import { WorkoutTemplateExerciseCreation, WorkoutTemplateExercise } from '@domain/entities/WorkoutTemplateExercises'
-import { WorkoutTemplateRepository } from '@domain/repositories/WorkoutTemplateRepository'
+import { WorkoutTemplate, WorkoutTemplateData } from '@/workoutTemplate/domain/workoutTemplate'
+import {
+  WorkoutTemplateExerciseCreation,
+  WorkoutTemplateExercise
+} from '@/workoutTemplateExercises/domain/WorkoutTemplateExercises'
+import { WorkoutTemplateRepository } from '@/workoutTemplate/domain/WorkoutTemplateRepository'
 import { Database } from '@/app/infrastructure/database/client'
 
 export class WorkoutTemplateRepositoryImpl implements WorkoutTemplateRepository {

@@ -5,8 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:swagger": "tsx ./src/app/infrastructure/swagger/swagger.ts",
-    "build": "npm run build:swagger && tsc",
-    "start": "node ./dist/app.js",
+    "db:up": "npm run db-migrate up",
+    "db:down": "npm run db-migrate down",
+    "start": "npm run db:up && npm run build:swagger && tsx ./src/app.ts",
     "dev": "tsx watch ./src/app.ts",
     "db-migrate": "node node_modules/db-migrate/bin/db-migrate",
     "lint:fix": "eslint --fix .",

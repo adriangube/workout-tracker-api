@@ -1,5 +1,5 @@
-import { CreateWorkoutTemplateDTO } from 'src/core/application/services/dto/workoutTemplate.dto'
-import { WorkoutTemplateData } from '@domain/entities/workoutTemplate'
+import { CreateWorkoutTemplateDTO } from '@/workoutTemplate/application/workoutTemplate.dto'
+import { WorkoutTemplateData } from '@/workoutTemplate/domain/workoutTemplate'
 
 
 export class WorkoutTemplateMapper {

@@ -7,5 +7,7 @@ export const config = {
   DB_NAME: process.env.POSTGRES_DB,
   SALT_ROUNDS: process.env.SALT_ROUNDS ? parseInt(process.env.SALT_ROUNDS) : 10,
   SECRET: process.env.SECRET,
-  ADMIN_USERNAME: process.env.ADMIN_USERNAME
+  ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+  ADMIN_EMAIL: process.env.ADMIN_EMAIL
 }

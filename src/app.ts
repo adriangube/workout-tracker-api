@@ -25,4 +25,4 @@ app.use((req, res) => {
 const port = config.PORT
 app.listen(port, () => {
   console.info(`App listening on port ${port}`)
-})      
+})

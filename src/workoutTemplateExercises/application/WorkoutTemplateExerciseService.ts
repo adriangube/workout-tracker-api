@@ -1,5 +1,8 @@
-import { WorkoutTemplateExercise, WorkoutTemplateExerciseCreation } from '@domain/entities/WorkoutTemplateExercises'
-import { WorkoutTemplateExerciseRepository } from '@domain/repositories/WorkoutTemplateExerciseRepository'
+import {
+  WorkoutTemplateExercise,
+  WorkoutTemplateExerciseCreation
+} from '@/workoutTemplateExercises/domain/WorkoutTemplateExercises'
+import { WorkoutTemplateExerciseRepository } from '@/workoutTemplateExercises/domain/WorkoutTemplateExerciseRepository'
 
 export class WorkoutTemplateExerciseService {
   constructor(

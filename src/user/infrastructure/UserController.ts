@@ -7,6 +7,7 @@ import { NotFoundError } from '@/app/application/errors/NotFoundError'
 import { ConflictError } from '@/app/application/errors/ConflictError'
 import { AuthService } from '@/auth/application/AuthService'
 import { UnauthorizedError } from '@/app/application/errors'
+import { UserWithPassword } from '../domain/user'
 
 export class UserController {
   constructor(
@@ -59,7 +60,7 @@ export class UserController {
           `Conflict: A user with the username "${validatorResult.data.username} already exists."`
         )
       }
-      const user = await this.userService.createUser(validatorResult.data)
+      const user = await this.userService.createUser(validatorResult.data as UserWithPassword)
       return res.status(200).send(user)
     } catch(e) {
       next(e)
