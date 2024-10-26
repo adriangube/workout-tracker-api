@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { CreateWorkoutTemplateDTO } from 'src/core/application/services/dto/workoutTemplate.dto'
+import { CreateWorkoutTemplateDTO } from '@/workoutTemplate/application/workoutTemplate.dto'
 
 export const workoutTemplateSchema = z.object({
   id: z.string().uuid().optional(),

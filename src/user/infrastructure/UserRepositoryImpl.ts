@@ -1,6 +1,8 @@
 import { User, UserData, UserWithPassword } from '@/user/domain/user'
 import { UserRepository } from '@/user/domain/UserRepository'
 import { Database } from '@/app/infrastructure/database/client'
+import { config } from '@/app/config'
+import { hashPassword } from '@/auth/utils/password'
 
 export class UserRepositoryImpl implements UserRepository {
 
@@ -82,5 +84,18 @@ export class UserRepositoryImpl implements UserRepository {
     await db.query(query)
     await db.end()
   }
-    
+  async createAdminUserIfNotExists(): Promise<void>{
+    const db = await Database.getConnection()
+    const password = await hashPassword(config.ADMIN_PASSWORD as string)
+    const query = {
+      text: `
+          INSERT INTO users (username, email, password)
+          VALUES ($1, $2, $3)
+          ON CONFLICT (username) DO NOTHING;
+        `,
+      values: [ config.ADMIN_USERNAME, config.ADMIN_EMAIL, password ]
+    }
+    await db.query(query)
+    await db.end()
+  }
 }
