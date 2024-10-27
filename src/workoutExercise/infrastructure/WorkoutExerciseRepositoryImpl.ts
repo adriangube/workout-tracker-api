@@ -23,8 +23,8 @@ export class WorkoutExerciseRepositoryImpl implements WorkoutExerciseRepository 
       text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getAllByWorkoutId.sql' }),
       values: [ workoutId ]
     }
-    const response = await db.query<WorkoutExercise[]>(query)
-    return response.rows[0]
+    const response = await db.query<WorkoutExercise>(query)
+    return response.rows
   }
   async update(data: UpdateWorkoutExerciseData): Promise<WorkoutExercise> {
     const { id, sets, reps, weight, notes } = data

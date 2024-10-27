@@ -30,6 +30,7 @@ FROM workouts w
   LEFT JOIN workout_exercises we ON we.workout_id = w.id
   LEFT JOIN workout_template_exercises wte ON we.template_exercise_id = wte.id
   LEFT JOIN exercises e ON wte.exercise_id = e.id
+  LEFT JOIN workout_templates wt ON w.template_id = wt.id
 WHERE w.id = $1
 GROUP BY w.id,
   w.user_id,

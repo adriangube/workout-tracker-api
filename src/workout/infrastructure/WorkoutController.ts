@@ -20,7 +20,7 @@ export class WorkoutController {
       if (validatorResult.error) {
         throw new BadRequestError(validatorResult?.error?.message)
       }
-      const workout = this.workoutService.getWorkoutById(validatorResult.data)
+      const workout = await this.workoutService.getWorkoutById(validatorResult.data)
       if (workout) {
         return res.status(200).send(workout)
       }

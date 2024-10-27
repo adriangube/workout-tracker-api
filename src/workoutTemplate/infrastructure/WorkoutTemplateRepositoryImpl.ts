@@ -29,9 +29,9 @@ export class WorkoutTemplateRepositoryImpl implements WorkoutTemplateRepository 
       text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getAllByUserId.sql' }),
       values: [ userId ]
     }
-    const response = await db.query<WorkoutTemplate[]>(query)
+    const response = await db.query<WorkoutTemplate>(query)
     await db.end()
-    return response?.rows[0]
+    return response?.rows
   }
 
   async save(workoutTemplate: WorkoutTemplateData): Promise<WorkoutTemplate> {

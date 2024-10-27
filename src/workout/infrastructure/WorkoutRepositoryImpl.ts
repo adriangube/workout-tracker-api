@@ -25,9 +25,9 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
       text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'getAllByUserId.sql' }),
       values: [ userId ]
     }
-    const response = await db.query<Workout[]>(query)
+    const response = await db.query<Workout>(query)
     await db.end()
-    return response.rows[0]
+    return response.rows
   }
 
   async start(userId: string, templateId: string): Promise<Workout> {
@@ -77,7 +77,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
 
     const response = await db.query(query)
     await db.end()
-    return response.rows[0]
+    return response.rows
   }
 
   private async initializeWorkoutExercises(workoutId: string, templateId: string): Promise<WorkoutExercise[]> {
@@ -147,6 +147,7 @@ export class WorkoutRepositoryImpl implements WorkoutRepository{
   private async updateWorkoutExercise(data: UpdateWorkoutExerciseData): Promise<void> {
     const { id, sets, reps, weight, notes } = data
     const db = await Database.getConnection()
+    
     const query = {
       text: loadSQL({ folderPath: this.sqlFolderPath, filename: 'updateWorkoutExercise.sql' }),
       values: [ id, sets, reps, weight, notes ]

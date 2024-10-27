@@ -19,9 +19,9 @@ export class WorkoutTemplateExerciseRepositoryImpl implements WorkoutTemplateExe
       values: [ workoutTemplateId ]
     }
 
-    const response = await db.query<WorkoutTemplateExercise[]>(query)
+    const response = await db.query<WorkoutTemplateExercise>(query)
     await db.end()
-    return response.rows[0]
+    return response.rows
   }
 
   async getById(id: string): Promise<WorkoutTemplateExercise> {
